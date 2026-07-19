@@ -1,0 +1,33 @@
+# Private or third-party course assets
+private_sources/
+*.mp4
+*.mov
+*.mkv
+subtitle.txt
+*.srt
+*.vtt
+
+# LaTeX build files
+book/build/
+book/figures/*.pdf
+output/pdf/*.pdf
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Local render and cache workspace
+tmp/

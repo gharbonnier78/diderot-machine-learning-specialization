@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Diderot ML - Machine Learning Specialization"
+type: book
+authors:
+  - family-names: Harbonnier
+    given-names: Guillaume
+version: 0.1.0
+date-released: 2026-07-19
+language: fr
+

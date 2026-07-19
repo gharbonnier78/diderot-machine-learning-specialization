@@ -1,0 +1,382 @@
+\chapter{La gaussienne, brique de la detection d'anomalies}
+\label{chap:gaussian}
+
+\section{Le probleme que nous voulons resoudre}
+
+Un systeme produit continuellement des mesures : temps de reponse, temperature,
+qualite d'une capture biometrique, nombre de tentatives, score de comparaison ou
+age d'un credential. La plupart de ces mesures decrivent le fonctionnement
+habituel. Quelques-unes peuvent cependant etre rares, inattendues ou
+incompatibles avec le regime connu.
+
+La detection d'anomalies commence par une question simple :
+
+\begin{quote}
+Quelle distribution decrit convenablement les observations normales, et a quel
+point une nouvelle observation est-elle compatible avec cette distribution?
+\end{quote}
+
+Pour une premiere caracteristique numerique $X$, nous utiliserons une
+distribution gaussienne, aussi appelee loi normale :
+\begin{equation}
+X\sim\mathcal N(\mu,\sigma^2).
+\end{equation}
+
+Cette notation se lit : ``$X$ suit une loi normale de moyenne mu et de variance
+sigma carre.''
+
+\section{Variable aleatoire, moyenne et dispersion}
+
+Une variable aleatoire $X$ associe une valeur numerique a une experience dont
+le resultat exact n'est pas connu a l'avance. Les observations disponibles sont
+notees
+\begin{equation}
+x^{(1)},x^{(2)},\ldots,x^{(m)}.
+\end{equation}
+L'exposant entre parentheses est un indice d'exemple, pas une puissance.
+
+La moyenne $\mu$ localise le centre du comportement :
+\begin{equation}
+\mu=\mathbb E[X].
+\end{equation}
+La variance mesure la dispersion quadratique autour du centre :
+\begin{equation}
+\sigma^2=\mathbb E[(X-\mu)^2].
+\end{equation}
+L'ecart-type est la racine carree de la variance :
+\begin{equation}
+\sigma=\sqrt{\sigma^2}.
+\end{equation}
+
+\begin{attentionbox}
+$\sigma$ est l'ecart-type et $\sigma^2$ est la variance. Si une latence est
+mesuree en millisecondes, $\sigma$ s'exprime en millisecondes tandis que
+$\sigma^2$ s'exprime en millisecondes carrees.
+\end{attentionbox}
+
+\section{La densite gaussienne}
+
+La densite d'une gaussienne univariee est
+\begin{equation}
+p(x;\mu,\sigma^2)=
+\frac{1}{\sqrt{2\pi}\,\sigma}
+\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
+\label{eq:gaussian}
+\end{equation}
+
+Elle contient deux mecanismes complementaires. Le terme
+\begin{equation}
+\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\end{equation}
+fait decroitre la densite lorsque $x$ s'eloigne de $\mu$. Le facteur
+\begin{equation}
+\frac{1}{\sqrt{2\pi}\sigma}
+\end{equation}
+normalise la courbe afin que son aire totale soit egale a un :
+\begin{equation}
+\int_{-\infty}^{+\infty}p(x)\,dx=1.
+\end{equation}
+
+\subsection{Densite et probabilite ne sont pas synonymes}
+
+Pour une variable continue, $p(x)$ est une hauteur de densite. La probabilite
+d'appartenir a un intervalle est une aire :
+\begin{equation}
+\Pr(a\le X\le b)=\int_a^b p(x)\,dx.
+\end{equation}
+Pour une classe etroite de largeur $\Delta x$ centree en $x$,
+\begin{equation}
+\Pr\left(x-\frac{\Delta x}{2}\le X\le x+\frac{\Delta x}{2}\right)
+\approx p(x)\Delta x.
+\end{equation}
+Avec $m$ observations, l'effectif attendu dans cette classe est donc environ
+$m p(x)\Delta x$.
+
+\begin{intuitionbox}
+Un histogramme normalise est une approximation empirique de la densite. Quand
+le nombre d'observations augmente et que les classes deviennent suffisamment
+fines, sa forme se rapproche de la courbe theorique $p(x)$.
+\end{intuitionbox}
+
+\section{Effet de la moyenne et de l'ecart-type}
+
+La figure~\ref{fig:gaussian-comparison} compare quatre distributions. La
+moyenne deplace la courbe; l'ecart-type change sa largeur.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.92\textwidth]{figures/gaussian-comparison.pdf}
+\caption{Effet de $\mu$ et $\sigma$ sur la densite gaussienne. Toutes les aires
+valent un. Figure originale generee par le code du depot.}
+\label{fig:gaussian-comparison}
+\end{figure}
+
+Le maximum de la densite se trouve en $x=\mu$ :
+\begin{equation}
+p(\mu)=\frac{1}{\sqrt{2\pi}\sigma}.
+\end{equation}
+Ainsi, pour $\sigma=1$, la hauteur maximale vaut environ $0{,}399$. Pour
+$\sigma=0{,}5$, elle vaut environ $0{,}798$. Une courbe plus etroite doit etre
+plus haute puisque son aire reste egale a un.
+
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$\mu$ & $\sigma$ & $\sigma^2$ & Effet principal \\
+\midrule
+$0$ & $1$ & $1$ & reference centree reduite \\
+$0$ & $0{,}5$ & $0{,}25$ & courbe etroite et haute \\
+$0$ & $2$ & $4$ & courbe large et basse \\
+$3$ & $0{,}5$ & $0{,}25$ & meme forme, centre deplace \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Pourquoi \texorpdfstring{$\pi$}{pi} apparait-il sans cercle visible?}
+
+Le facteur $\sqrt{2\pi}$ provient de l'integrale gaussienne. Considerons
+\begin{equation}
+I=\int_{-\infty}^{+\infty}e^{-x^2/2}\,dx.
+\end{equation}
+Cette integrale resiste aux primitives elementaires. L'idee decisive est de la
+mettre au carre :
+\begin{align}
+I^2
+&=\left(\int_{-\infty}^{+\infty}e^{-x^2/2}\,dx\right)
+  \left(\int_{-\infty}^{+\infty}e^{-y^2/2}\,dy\right)\\
+&=\iint_{\mathbb R^2}e^{-(x^2+y^2)/2}\,dx\,dy.
+\end{align}
+Le cercle cache apparait maintenant : $x^2+y^2=r^2$. En coordonnees polaires,
+$dx\,dy=r\,dr\,d\theta$, donc
+\begin{align}
+I^2
+&=\int_0^{2\pi}\int_0^{+\infty}e^{-r^2/2}r\,dr\,d\theta\\
+&=2\pi\left[-e^{-r^2/2}\right]_{0}^{+\infty}=2\pi.
+\end{align}
+Par consequent,
+\begin{equation}
+I=\sqrt{2\pi}.
+\end{equation}
+
+\begin{intuitionbox}
+Le cercle n'est pas visible dans la courbe unidimensionnelle. Il apparait quand
+on duplique l'integrale et que la symetrie quadratique $x^2+y^2$ devient une
+symetrie circulaire. Le nombre $\pi$ vient du tour complet de l'angle
+$0\le\theta\le2\pi$.
+\end{intuitionbox}
+
+\section{Gaussienne centree, reduite et score standardise}
+
+Une loi normale est centree lorsque $\mu=0$. Elle est centree reduite lorsque
+\begin{equation}
+Z\sim\mathcal N(0,1).
+\end{equation}
+Toute observation gaussienne peut etre standardisee :
+\begin{equation}
+z=\frac{x-\mu}{\sigma}.
+\end{equation}
+Le score $z$ indique a combien d'ecarts-types l'observation se trouve du centre.
+La densite s'ecrit alors
+\begin{equation}
+p(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-z^2/2}.
+\end{equation}
+C'est donc la distance quadratique normalisee $z^2$ qui controle la chute de la
+densite.
+
+\section{Estimer les parametres a partir des donnees}
+
+Dans une application, $\mu$ et $\sigma^2$ sont inconnus. A partir des $m$
+observations d'entrainement, nous utilisons
+\begin{equation}
+\widehat\mu=\frac{1}{m}\sum_{i=1}^{m}x^{(i)},
+\label{eq:mu-hat}
+\end{equation}
+et
+\begin{equation}
+\widehat\sigma^2=
+\frac{1}{m}\sum_{i=1}^{m}\left(x^{(i)}-\widehat\mu\right)^2.
+\label{eq:sigma-hat}
+\end{equation}
+Le chapeau rappelle qu'il s'agit d'estimations calculees sur un echantillon.
+
+\subsection{Exemple numerique}
+
+Pour les valeurs $8,9,10,11,12$,
+\begin{equation}
+\widehat\mu=10.
+\end{equation}
+Les ecarts au centre sont $-2,-1,0,1,2$, et leurs carres sont $4,1,0,1,4$.
+La variance estimee est
+\begin{equation}
+\widehat\sigma^2=\frac{4+1+0+1+4}{5}=2,
+\end{equation}
+d'ou $\widehat\sigma=\sqrt{2}\approx1{,}414$. Le modele ajuste est
+$\mathcal N(10,2)$, le second parametre etant la variance.
+
+\section{Maximum de vraisemblance}
+
+Les formules~\eqref{eq:mu-hat} et~\eqref{eq:sigma-hat} sont les estimateurs du
+maximum de vraisemblance. On suppose les observations independantes et issues
+d'une meme gaussienne. Leur vraisemblance conjointe est
+\begin{equation}
+L(\mu,\sigma^2)=\prod_{i=1}^{m}p(x^{(i)};\mu,\sigma^2).
+\end{equation}
+Nous cherchons les parametres rendant les donnees observees aussi vraisemblables
+que possible :
+\begin{equation}
+(\widehat\mu,\widehat\sigma^2)=
+\arg\max_{\mu,\sigma^2}L(\mu,\sigma^2).
+\end{equation}
+
+Le logarithme transforme le produit en somme :
+\begin{equation}
+\log L=-\frac{m}{2}\log(2\pi)-m\log\sigma
+-\frac{1}{2\sigma^2}\sum_{i=1}^{m}(x^{(i)}-\mu)^2.
+\end{equation}
+Annuler les derivees par rapport a $\mu$ et $\sigma^2$ redonne les deux
+estimateurs precedents.
+
+\subsection{Le pont avec K-means}
+
+Maximiser la vraisemblance par rapport a $\mu$ revient notamment a minimiser
+\begin{equation}
+\sum_{i=1}^{m}(x^{(i)}-\mu)^2.
+\end{equation}
+Le minimum est atteint par la moyenne. C'est exactement la raison pour laquelle
+K-means place un centroide a la moyenne des points qui lui sont affectes. Le
+modele gaussien ajoute au centre une mesure de dispersion et une interpretation
+probabiliste.
+
+\subsection{Pourquoi parfois \texorpdfstring{$m-1$}{m-1}?}
+
+L'estimateur de maximum de vraisemblance divise par $m$. En statistique
+descriptive, on rencontre aussi
+\begin{equation}
+s^2=\frac{1}{m-1}\sum_{i=1}^{m}(x^{(i)}-\bar x)^2.
+\end{equation}
+La division par $m-1$ corrige le biais d'estimation de la variance d'une
+population lorsque la moyenne a ete estimee sur le meme echantillon. Pour de
+grands echantillons, la difference pratique devient faible.
+
+\section{De la densite a la decision d'anomalie}
+
+Une fois $\widehat\mu$ et $\widehat\sigma^2$ appris, une nouvelle observation
+$x_{\mathrm{new}}$ recoit la densite
+\begin{equation}
+p(x_{\mathrm{new}};\widehat\mu,\widehat\sigma^2).
+\end{equation}
+La regle de decision utilise un seuil $\varepsilon$ :
+\begin{equation}
+p(x_{\mathrm{new}})<\varepsilon
+\quad\Longrightarrow\quad
+\text{anomalie potentielle}.
+\end{equation}
+
+Une faible densite ne prouve ni fraude ni panne. Elle signifie seulement que
+l'observation appartient a une region peu compatible avec le modele normal.
+Une analyse de contexte reste necessaire.
+
+\begin{engineeringbox}
+Pour un systeme d'identite, une anomalie peut provenir d'une fraude, d'un capteur
+defaillant, d'une integration cliente incorrecte, d'un changement de population
+ou d'un utilisateur legitime confronte a un processus inadapte. Un moteur de
+risque responsable doit donc distinguer detection statistique, qualification de
+cause et decision operationnelle, notamment pour eviter l'exclusion.
+\end{engineeringbox}
+
+\section{Passage a plusieurs caracteristiques}
+
+Une application reelle observe un vecteur
+\begin{equation}
+\mathbf x=(x_1,x_2,\ldots,x_n).
+\end{equation}
+Une premiere extension ajuste une gaussienne par caracteristique :
+\begin{equation}
+x_j\sim\mathcal N(\mu_j,\sigma_j^2),
+\end{equation}
+puis combine les densites :
+\begin{equation}
+p(\mathbf x)=\prod_{j=1}^{n}p(x_j;\mu_j,\sigma_j^2).
+\end{equation}
+Cette construction sera developpee dans le chapitre suivant. Elle repose sur
+une hypothese d'independance ou, plus prudemment, sur l'idee que les dependances
+non modelisees restent acceptables pour la decision recherchee.
+
+En pratique, le calcul numerique utilise souvent la log-densite :
+\begin{equation}
+\log p(\mathbf x)=\sum_{j=1}^{n}\log p(x_j),
+\end{equation}
+afin d'eviter qu'un produit de nombreux petits nombres ne soit arrondi a zero.
+
+\section{Limites et attention epistemologique}
+
+\begin{attentionbox}
+Une valeur rare n'est pas necessairement une erreur, et une fraude peut etre
+statistiquement ordinaire. Le resultat depend des variables choisies, de la
+representativite des donnees dites normales, de la stabilite du regime et du
+seuil de decision. Une contamination du jeu d'entrainement par des anomalies
+peut deplacer la moyenne, gonfler la variance et rendre le detecteur moins
+sensible.
+\end{attentionbox}
+
+Il faut notamment verifier :
+\begin{itemize}
+  \item la forme empirique de chaque distribution;
+  \item la presence de valeurs extremes dans l'entrainement;
+  \item les correlations entre caracteristiques;
+  \item les differences entre capteurs, populations et periodes;
+  \item la derive temporelle;
+  \item le cout respectif des faux positifs et des faux negatifs.
+\end{itemize}
+
+\section{Exercices}
+
+\subsection*{Exercice 1 - Lecture de notation}
+Lire a voix haute $X\sim\mathcal N(3,0{,}25)$ et donner $\mu$, $\sigma$ et
+$\sigma^2$.
+
+\subsection*{Exercice 2 - Estimation}
+Pour $x=(2,4,4,5,5)$, calculer $\widehat\mu$, $\widehat\sigma^2$ avec la
+division par $m$, puis $\widehat\sigma$.
+
+\subsection*{Exercice 3 - Effet de l'echelle}
+Une latence suit $\mathcal N(100,10^2)$. Calculer le score $z$ associe a
+$x=130$ ms et expliquer son interpretation sans conclure automatiquement a une
+panne.
+
+\subsection*{Exercice 4 - Cercle cache}
+Expliquer en quatre lignes pourquoi $\pi$ apparait dans la constante de
+normalisation de la gaussienne.
+
+\subsection*{Exercice 5 - Conception d'un detecteur}
+Proposer cinq caracteristiques pour detecter des comportements inhabituels dans
+un ecosysteme d'identite. Pour chacune, identifier au moins un cas rare mais
+legitime.
+
+\section{Reponses breves}
+
+\begin{enumerate}
+  \item Moyenne $3$, variance $0{,}25$, ecart-type $0{,}5$.
+  \item $\widehat\mu=4$; ecarts carres $4,0,0,1,1$;
+  $\widehat\sigma^2=6/5=1{,}2$ et $\widehat\sigma\approx1{,}095$.
+  \item $z=(130-100)/10=3$. La mesure est eloignee de trois ecarts-types du
+  centre, donc inhabituelle sous ce modele, mais sa cause reste a qualifier.
+  \item Le carre de l'integrale devient une integrale en deux dimensions. Le
+  terme $x^2+y^2$ possede une symetrie circulaire. Les coordonnees polaires
+  introduisent un angle parcourant $0$ a $2\pi$.
+  \item La reponse doit distinguer signal statistique, contexte et cause.
+\end{enumerate}
+
+\begin{revisionbox}
+\begin{align*}
+X&\sim\mathcal N(\mu,\sigma^2),\\
+p(x)&=\frac{1}{\sqrt{2\pi}\sigma}
+e^{-(x-\mu)^2/(2\sigma^2)},\\
+\widehat\mu&=\frac1m\sum_i x^{(i)},\\
+\widehat\sigma^2&=\frac1m\sum_i(x^{(i)}-\widehat\mu)^2,\\
+z&=\frac{x-\mu}{\sigma},\\
+p(x)&<\varepsilon\quad\Rightarrow\quad\text{anomalie potentielle}.
+\end{align*}
+$\mu$ deplace la courbe; $\sigma$ change sa largeur; l'aire totale vaut un;
+$p(x)$ est une densite; une anomalie statistique n'est pas une cause.
+\end{revisionbox}

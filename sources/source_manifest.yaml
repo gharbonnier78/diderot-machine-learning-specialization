@@ -1,0 +1,20 @@
+schema_version: 1
+updated: "2026-07-19"
+sources:
+  - id: m3-w1-11-video
+    kind: private_course_video
+    original_filename: index.mp4
+    sha256: 20ef37b82495c16e95b53803c48d66059bf0d8b9432eb19d24f97c537879143c
+    duration_seconds: 639.57
+    video: {codec: h264, width: 1280, height: 720, fps: 30}
+    audio: {codec: aac}
+    publication: excluded
+    note: "Source privee utilisee pour etude; non redistribuee."
+  - id: m3-w1-11-subtitles
+    kind: private_course_transcript
+    original_filename: subtitle.txt
+    sha256: 50cfb53a15a11d33211111e91690000ce76a904b5163d7b5008e5f20ea336f7a
+    bytes: 8048
+    publication: excluded
+    note: "Transcript integral non inclus; seules des reformulations originales sont publiees."
+

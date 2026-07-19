@@ -1,0 +1,90 @@
+\documentclass[11pt,twoside,openright]{book}
+
+\usepackage[a4paper,inner=27mm,outer=23mm,top=25mm,bottom=28mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[provide=*,french]{babel}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{DiderotRed}{HTML}{7A1F2B}
+\definecolor{DiderotBlue}{HTML}{126E82}
+\definecolor{DiderotMint}{HTML}{E8F3F0}
+\definecolor{DiderotGold}{HTML}{C99A2E}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=DiderotRed,
+  urlcolor=DiderotBlue,
+  citecolor=DiderotBlue,
+  pdftitle={Diderot ML - Comprendre la Machine Learning Specialization},
+  pdfauthor={Guillaume Harbonnier},
+  pdfsubject={Distribution gaussienne et detection d'anomalies},
+  pdfkeywords={machine learning, gaussienne, detection d'anomalies, Diderot ML}
+}
+
+\newtcolorbox{intuitionbox}{enhanced,breakable,colback=DiderotMint,colframe=DiderotBlue,
+  title=Intuition, fonttitle=\bfseries,boxrule=0.7pt,arc=1mm}
+\newtcolorbox{attentionbox}{enhanced,breakable,colback=yellow!7,colframe=DiderotGold!80!black,
+  title=Attention, fonttitle=\bfseries,boxrule=0.7pt,arc=1mm}
+\newtcolorbox{engineeringbox}{enhanced,breakable,colback=blue!3,colframe=DiderotBlue,
+  title=Application d'ingenierie, fonttitle=\bfseries,boxrule=0.7pt,arc=1mm}
+\newtcolorbox{revisionbox}{enhanced,breakable,colback=red!3,colframe=DiderotRed,
+  title=Fiche de revision, fonttitle=\bfseries,boxrule=0.8pt,arc=1mm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textsc{Diderot ML}}
+\fancyhead[RO]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+\setlist{itemsep=0.25em,topsep=0.5em}
+
+\begin{document}
+
+\frontmatter
+\begin{titlepage}
+  \centering
+  \vspace*{23mm}
+  {\sffamily\bfseries\color{DiderotRed}\fontsize{30}{35}\selectfont
+   Diderot ML\par}
+  \vspace{5mm}
+  {\sffamily\bfseries\fontsize{22}{27}\selectfont
+   Comprendre la Machine Learning Specialization\par}
+  \vspace{6mm}
+  {\Large Des formules a l'ingenierie des systemes\par}
+  \vfill
+  \begin{tcolorbox}[width=.82\textwidth,colback=DiderotMint,colframe=DiderotBlue,arc=1mm]
+  \centering
+  \textbf{Volume de travail v0.1.0}\par
+  Distribution gaussienne et fondements de la detection d'anomalies
+  \end{tcolorbox}
+  \vfill
+  {\large Guillaume Harbonnier\par}
+  \vspace{2mm}
+  {\small 19 juillet 2026\par}
+\end{titlepage}
+
+\input{chapters/00-preface}
+\tableofcontents
+
+\mainmatter
+\part{Apprentissage non supervise}
+\input{chapters/m3-w1-11-gaussian}
+
+\part{Carnet de progression}
+\input{chapters/roadmap}
+
+\backmatter
+\input{chapters/appendix-notation}
+
+\end{document}
