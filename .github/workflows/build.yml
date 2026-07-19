@@ -13,11 +13,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: sudo apt-get update && sudo apt-get install -y texlive-luatex texlive-latex-extra texlive-lang-french latexmk
+      - run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-french latexmk
       - run: make test
       - run: make book
       - uses: actions/upload-artifact@v4
         with:
           name: diderot-ml-book
           path: output/pdf/*.pdf
-

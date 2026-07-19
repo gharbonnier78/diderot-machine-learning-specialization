@@ -23,7 +23,7 @@ et l'avancement dans [`docs/progress.md`](docs/progress.md).
 
 ## Construire le livre
 
-Prerequis : LuaLaTeX, Python 3, NumPy, Matplotlib et pytest.
+Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
 
 ```bash
 make setup
@@ -61,4 +61,3 @@ d'exercices propres.
 ## Auteur
 
 Guillaume Harbonnier - Diderot ML, 2026.
-
