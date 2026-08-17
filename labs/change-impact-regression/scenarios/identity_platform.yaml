@@ -1,0 +1,102 @@
+name: identity-platform-v0
+metadata:
+  domain: synthetic distributed identity platform
+  purpose: change-impact and regression-evidence experimentation
+  note: The graph is synthetic and does not represent any production IN Groupe architecture.
+
+nodes:
+  - {id: citizen_app, kind: ui, criticality: 2, zone: edge, tags: [enrollment, auth], failure_modes: [functional, timeout]}
+  - {id: api_gateway, kind: gateway, criticality: 4, zone: dmz, tags: [enrollment, auth, timing], failure_modes: [functional, timeout, availability]}
+  - {id: enrollment_service, kind: service, criticality: 4, zone: core, tags: [enrollment], failure_modes: [functional, timeout]}
+  - {id: identity_service, kind: service, criticality: 5, zone: core, tags: [identity, schema, state], failure_modes: [functional, schema_mismatch, stale_state]}
+  - {id: auth_service, kind: service, criticality: 5, zone: core, tags: [auth, security, state, timing], failure_modes: [functional, stale_state, authorization, timeout]}
+  - {id: biometric_service, kind: service, criticality: 5, zone: core, tags: [biometric, device, ml], failure_modes: [functional, acquisition, model_shift]}
+  - {id: risk_engine, kind: service, criticality: 5, zone: core, tags: [risk, ml, data], failure_modes: [functional, data_shift, model_shift]}
+  - {id: event_bus, kind: messaging, criticality: 4, zone: platform, tags: [schema, resource, timing], failure_modes: [schema_mismatch, latency, availability]}
+  - {id: identity_db, kind: database, criticality: 5, zone: data, tags: [identity, state, resource], failure_modes: [stale_state, latency, availability]}
+  - {id: audit_db, kind: database, criticality: 4, zone: data, tags: [audit, schema], failure_modes: [schema_mismatch, availability]}
+  - {id: session_cache, kind: cache, criticality: 5, zone: platform, tags: [auth, state, config, resource], failure_modes: [stale_state, latency, race]}
+  - {id: config_service, kind: configuration, criticality: 4, zone: platform, tags: [config], failure_modes: [misconfiguration]}
+  - {id: policy_service, kind: policy, criticality: 5, zone: security, tags: [auth, security], failure_modes: [authorization, availability]}
+  - {id: kms, kind: security, criticality: 5, zone: security, tags: [auth, security], failure_modes: [authorization, availability]}
+  - {id: device_adapter, kind: adapter, criticality: 4, zone: device, tags: [biometric, device, supplier], failure_modes: [functional, compatibility, acquisition]}
+  - {id: capture_device, kind: device, criticality: 5, zone: device, tags: [biometric, device, sensor], failure_modes: [acquisition, timeout]}
+  - {id: supplier_sdk, kind: library, criticality: 4, zone: device, tags: [biometric, supplier], failure_modes: [compatibility, functional]}
+  - {id: ml_model, kind: model, criticality: 4, zone: ml, tags: [ml, biometric, data], failure_modes: [model_shift, data_shift]}
+  - {id: feature_store, kind: data, criticality: 4, zone: ml, tags: [ml, data], failure_modes: [data_shift, availability]}
+  - {id: observability, kind: telemetry, criticality: 3, zone: platform, tags: [timing, audit], failure_modes: [functional]}
+
+edges:
+  - {source: citizen_app, target: api_gateway, mechanism: call, probability: 0.98}
+  - {source: api_gateway, target: enrollment_service, mechanism: call, probability: 0.95}
+  - {source: api_gateway, target: auth_service, mechanism: call, probability: 0.95}
+  - {source: enrollment_service, target: identity_service, mechanism: call, probability: 0.92}
+  - {source: enrollment_service, target: biometric_service, mechanism: call, probability: 0.90}
+  - {source: identity_service, target: identity_db, mechanism: state, probability: 0.88}
+  - {source: identity_db, target: identity_service, mechanism: state, probability: 0.75}
+  - {source: identity_service, target: session_cache, mechanism: state, probability: 0.90}
+  - {source: session_cache, target: auth_service, mechanism: state, probability: 0.92}
+  - {source: identity_service, target: event_bus, mechanism: message, probability: 0.82}
+  - {source: event_bus, target: risk_engine, mechanism: message, probability: 0.88}
+  - {source: event_bus, target: audit_db, mechanism: message, probability: 0.86}
+  - {source: risk_engine, target: policy_service, mechanism: control, probability: 0.74}
+  - {source: policy_service, target: auth_service, mechanism: security, probability: 0.88}
+  - {source: kms, target: auth_service, mechanism: security, probability: 0.70}
+  - {source: auth_service, target: api_gateway, mechanism: timing, probability: 0.72}
+  - {source: enrollment_service, target: api_gateway, mechanism: timing, probability: 0.68}
+  - {source: biometric_service, target: enrollment_service, mechanism: timing, probability: 0.72}
+  - {source: supplier_sdk, target: device_adapter, mechanism: supplier, probability: 0.92}
+  - {source: capture_device, target: device_adapter, mechanism: sensor, probability: 0.88}
+  - {source: device_adapter, target: biometric_service, mechanism: device, probability: 0.90}
+  - {source: feature_store, target: ml_model, mechanism: data, probability: 0.82}
+  - {source: ml_model, target: biometric_service, mechanism: ml, probability: 0.78}
+  - {source: ml_model, target: risk_engine, mechanism: ml, probability: 0.64}
+  - {source: config_service, target: auth_service, mechanism: configuration, probability: 0.88}
+  - {source: config_service, target: identity_service, mechanism: configuration, probability: 0.86}
+  - {source: config_service, target: biometric_service, mechanism: configuration, probability: 0.78}
+  - {source: event_bus, target: observability, mechanism: resource, probability: 0.66}
+  - {source: identity_db, target: observability, mechanism: resource, probability: 0.62}
+  - {source: session_cache, target: observability, mechanism: resource, probability: 0.60}
+  - {source: event_bus, target: auth_service, mechanism: resource, probability: 0.45, visible: false}
+  - {source: supplier_sdk, target: capture_device, mechanism: timing, probability: 0.36, visible: false}
+  - {source: feature_store, target: risk_engine, mechanism: data, probability: 0.72, visible: false}
+
+changes:
+  - id: CHG_CACHE_TTL
+    target: session_cache
+    category: config
+    magnitude: 0.95
+    description: Increase session-cache TTL; functional retest may pass while stale authorization state propagates.
+  - id: CHG_IDENTITY_EVENT_V2
+    target: identity_service
+    category: schema
+    magnitude: 0.90
+    description: Evolve identity event payload and serialization.
+  - id: CHG_EVENTBUS_POOL
+    target: event_bus
+    category: resource
+    magnitude: 0.92
+    description: Change event-bus connection/thread-pool sizing under load.
+  - id: CHG_SUPPLIER_SDK
+    target: supplier_sdk
+    category: supplier
+    magnitude: 0.95
+    description: Upgrade a device supplier SDK with unchanged public adapter API.
+
+tests:
+  - {id: T_UNIT_IDENTITY, covers: [identity_service], detects: {functional: 0.92, schema_mismatch: 0.50, stale_state: 0.20}, cost: 1, historical_relevance: {schema: 0.70, config: 0.20, resource: 0.05, supplier: 0.00}}
+  - {id: T_API_ENROLL, covers: [citizen_app, api_gateway, enrollment_service, identity_service], detects: {functional: 0.88, schema_mismatch: 0.62, timeout: 0.55}, cost: 3, historical_relevance: {schema: 0.65, config: 0.20, resource: 0.30, supplier: 0.15}}
+  - {id: T_AUTH_FLOW, covers: [citizen_app, api_gateway, auth_service, identity_service, session_cache, policy_service], detects: {functional: 0.90, stale_state: 0.78, authorization: 0.87, timeout: 0.62}, cost: 3, historical_relevance: {schema: 0.25, config: 0.80, resource: 0.50, supplier: 0.00}}
+  - {id: T_CACHE_CONCURRENCY, covers: [session_cache, auth_service, identity_service], detects: {stale_state: 0.96, race: 0.92, timeout: 0.52, latency: 0.45}, cost: 5, historical_relevance: {schema: 0.10, config: 0.95, resource: 0.65, supplier: 0.00}}
+  - {id: T_SCHEMA_CONTRACT, covers: [identity_service, event_bus, risk_engine, audit_db], detects: {schema_mismatch: 0.97, functional: 0.45}, cost: 2, historical_relevance: {schema: 0.98, config: 0.05, resource: 0.10, supplier: 0.00}}
+  - {id: T_EVENT_REPLAY, covers: [event_bus, risk_engine, audit_db, observability], detects: {schema_mismatch: 0.82, availability: 0.62, latency: 0.50, functional: 0.40}, cost: 4, historical_relevance: {schema: 0.75, config: 0.05, resource: 0.75, supplier: 0.00}}
+  - {id: T_LOAD_AUTH, covers: [api_gateway, auth_service, session_cache, identity_db, event_bus, observability], detects: {latency: 0.92, timeout: 0.88, stale_state: 0.42, availability: 0.60}, cost: 8, historical_relevance: {schema: 0.10, config: 0.60, resource: 0.95, supplier: 0.00}}
+  - {id: T_FAILOVER, covers: [api_gateway, event_bus, identity_db, session_cache, policy_service], detects: {availability: 0.92, timeout: 0.72, stale_state: 0.35}, cost: 10, historical_relevance: {schema: 0.05, config: 0.25, resource: 0.85, supplier: 0.00}}
+  - {id: T_SECURITY_POLICY, covers: [auth_service, policy_service, kms], detects: {authorization: 0.97, availability: 0.40, functional: 0.45}, cost: 6, historical_relevance: {schema: 0.05, config: 0.55, resource: 0.10, supplier: 0.00}}
+  - {id: T_BIO_E2E, covers: [citizen_app, api_gateway, enrollment_service, biometric_service, device_adapter, supplier_sdk, capture_device], detects: {functional: 0.82, compatibility: 0.84, acquisition: 0.92, timeout: 0.58, model_shift: 0.32}, cost: 7, historical_relevance: {schema: 0.05, config: 0.25, resource: 0.20, supplier: 0.90}}
+  - {id: T_SUPPLIER_COMPAT, covers: [supplier_sdk, device_adapter, biometric_service, capture_device], detects: {compatibility: 0.97, functional: 0.68, acquisition: 0.72, timeout: 0.30}, cost: 4, historical_relevance: {schema: 0.00, config: 0.05, resource: 0.05, supplier: 0.99}}
+  - {id: T_ML_SHIFT, covers: [feature_store, ml_model, biometric_service, risk_engine], detects: {data_shift: 0.84, model_shift: 0.88, functional: 0.30}, cost: 6, historical_relevance: {schema: 0.05, config: 0.10, resource: 0.05, supplier: 0.15}}
+  - {id: T_CONFIG_MATRIX, covers: [config_service, auth_service, identity_service, biometric_service, session_cache], detects: {misconfiguration: 0.92, functional: 0.55, stale_state: 0.35}, cost: 5, historical_relevance: {schema: 0.10, config: 0.97, resource: 0.15, supplier: 0.05}}
+  - {id: T_DEVICE_SYNC, covers: [capture_device, device_adapter, biometric_service], detects: {acquisition: 0.84, race: 0.78, timeout: 0.46, compatibility: 0.55}, cost: 5, historical_relevance: {schema: 0.00, config: 0.05, resource: 0.10, supplier: 0.78}}
+  - {id: T_SMOKE, covers: [api_gateway, enrollment_service, auth_service, identity_service, biometric_service], detects: {functional: 0.58, timeout: 0.22}, cost: 2, historical_relevance: {schema: 0.35, config: 0.35, resource: 0.35, supplier: 0.25}}
+  - {id: T_TELEMETRY_ASSERTIONS, covers: [observability, api_gateway, auth_service, event_bus, identity_db, session_cache], detects: {latency: 0.76, timeout: 0.68, availability: 0.52, stale_state: 0.18}, cost: 3, historical_relevance: {schema: 0.10, config: 0.30, resource: 0.88, supplier: 0.00}}
