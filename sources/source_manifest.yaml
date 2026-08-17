@@ -1,5 +1,5 @@
 schema_version: 1
-updated: "2026-07-19"
+updated: "2026-08-17"
 sources:
   - id: m3-w1-11-video
     kind: private_course_video
@@ -17,4 +17,16 @@ sources:
     bytes: 8048
     publication: excluded
     note: "Transcript integral non inclus; seules des reformulations originales sont publiees."
+  - id: wave-toy-linkedin-inspiration-2026-08-17
+    kind: public_social_post
+    author: "Quentin Coet-Liegeois"
+    url: "https://lnkd.in/ePhnTbaX"
+    accessed: "2026-08-17"
+    publication: reference_only
+    note: >-
+      Inspiration initiale: simulation 2D d'une equation d'onde par differences
+      finies, source oscillante, visualisation d'amplitude et discussion CFL.
+      Les captures fournies dans la conversation ne sont pas redistribuees; le
+      laboratoire publie uniquement du texte, du code et des derivations
+      pedagogiques originales.
 
