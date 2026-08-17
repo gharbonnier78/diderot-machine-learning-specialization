@@ -1,0 +1,7 @@
+change_id: CHG_SUPPLIER_SDK
+budget: 20.0
+completeness: 0.75
+false_edge_rate: 0.03
+graph_seed: 43
+propagation_seed: 47
+detection_seed: 53
