@@ -63,19 +63,29 @@ Propagation is stochastic and seed-controlled; these are not hard-coded expected
 
 R5 currently uses a deliberately simple logistic-regression baseline. It is an **AI-assisted research baseline**, not a production AI agent and not a claim of superiority. The current hidden change outcome is excluded from R5 training; historical labels emulate previously investigated incidents.
 
-## Test and evidence model
+## Test, coverage and explicit fault-injection model
 
 Each test declares system elements it exercises, relative execution cost, failure modes it can detect, modeled probability of detection for each mode and historical relevance by change category.
 
-This permits experiments in which node coverage is high while detection power for a critical failure remains weak:
+The lab now also contains an explicit **fault-injection plane** independent of change propagation. `faults.py` can build a catalogue from declared node failure modes or run a manually controlled set of injected faults. For each fault the campaign records:
+
+- whether the affected node was covered by the selected regression set;
+- the modeled probability that the selected oracles detect that failure mode;
+- a seed-controlled realized detection outcome.
+
+This makes it possible to exhibit the important counterexample directly: a node may be covered while the selected oracle has zero detection probability for the injected failure mode.
 
 ```text
 Coverage != Detection != Decision Evidence
 ```
 
+The current injection layer is intentionally simple: it perturbs declared failure modes rather than source ASTs or deployed services. It therefore acts as a controlled experimental analogue of mutation/fault injection, not as a replacement for a real mutation-testing engine.
+
 ## Metrics
 
 The first implementation reports impact recall, critical-impact recall, impacted-node coverage, critical-node coverage, mean POD, critical mean/minimum POD, critical zero-detection miss rate, realized stochastic detection rate, execution cost and tests executed.
+
+Fault campaigns additionally report node coverage, mean modeled POD, realized detection score and critical mean POD.
 
 These metrics remain separate. No single scalar is treated as sufficient release evidence.
 
@@ -107,6 +117,7 @@ src/diderot_mls/change_impact/
   simulator.py       hidden graph, observed graph and stochastic propagation
   selectors.py       R0-R5
   metrics.py         coverage/detection/evidence metrics
+  faults.py          controlled fault catalogue and injection campaigns
   experiment.py      reproducible comparison and Monte Carlo sweep
   visualization.py   architecture and post-hoc impact overlays
 ```
@@ -115,6 +126,8 @@ src/diderot_mls/change_impact/
 
 Randomness is controlled independently for observed-graph degradation, true propagation and realized detection. This allows one uncertainty source to vary while the others are held fixed.
 
+The current automated suite contains eight dedicated lab invariants: six for scenario/graph/selector behavior and two specifically checking the fault-injection plane, including the case `covered == True` with `POD == 0` because the oracle is inappropriate.
+
 ## What this lab does not prove
 
 The simulator does not establish production propagation probabilities, real defect frequencies, real test POD, superiority of selective regression, superiority of AI, or a release threshold. Those require studies on real change histories, independently adjudicated regressions, representative environments and preregistered endpoints.
@@ -122,7 +135,7 @@ The simulator does not establish production propagation probabilities, real defe
 ## Planned extensions
 
 1. explicit environment representativity and observability parameters;
-2. fault/mutant catalogue with controlled injections;
+2. richer mutation operators, correlated/multi-fault injections and eventually adapters to real mutation-test outputs;
 3. richer temporal/resource simulation with SimPy;
 4. evidence-actionability layer and reversible triage/grouping;
 5. multiple independently generated system topologies;
