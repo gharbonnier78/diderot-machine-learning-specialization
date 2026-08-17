@@ -9,6 +9,10 @@ from .selectors import (
     select_r5_ai_assisted,
 )
 from .metrics import Evaluation, evaluate_selection, event_detection_probability
+from .faults import (
+    InjectedFault, build_fault_catalogue, evaluate_fault_campaign,
+    summarize_fault_campaign,
+)
 from .experiment import ExperimentBundle, monte_carlo_sweep, run_comparison
 from .visualization import plot_selection_overlay, plot_system_graph
 
@@ -19,6 +23,8 @@ __all__ = [
     "select_r0_full", "select_r1_history", "select_r2_code_graph",
     "select_r3_system_graph", "select_r4_risk_aware",
     "select_r5_ai_assisted", "Evaluation", "evaluate_selection",
-    "event_detection_probability", "ExperimentBundle", "run_comparison",
-    "monte_carlo_sweep", "plot_system_graph", "plot_selection_overlay",
+    "event_detection_probability", "InjectedFault", "build_fault_catalogue",
+    "evaluate_fault_campaign", "summarize_fault_campaign",
+    "ExperimentBundle", "run_comparison", "monte_carlo_sweep",
+    "plot_system_graph", "plot_selection_overlay",
 ]
