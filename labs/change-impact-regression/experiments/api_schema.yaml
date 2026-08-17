@@ -1,0 +1,7 @@
+change_id: CHG_IDENTITY_EVENT_V2
+budget: 20.0
+completeness: 0.80
+false_edge_rate: 0.02
+graph_seed: 13
+propagation_seed: 19
+detection_seed: 29
