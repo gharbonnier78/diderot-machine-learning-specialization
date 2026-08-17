@@ -1,0 +1,7 @@
+change_id: CHG_EVENTBUS_POOL
+budget: 20.0
+completeness: 0.72
+false_edge_rate: 0.03
+graph_seed: 31
+propagation_seed: 37
+detection_seed: 41
