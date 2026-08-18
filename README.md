@@ -37,6 +37,12 @@ langage courant et le notebook compagnon est executable :
 
 [`notebooks/waves/00_wave_equation_toy_lab.ipynb`](notebooks/waves/00_wave_equation_toy_lab.ipynb)
 
+Les approximations numeriques importantes sont rendues explicites dans
+[`docs/waves-numerical-caveats.md`](docs/waves-numerical-caveats.md) : source
+ponctuelle de cellule versus Dirac normalisee, points fantomes de Neumann,
+frequence continue versus frequence discrete et portee exacte de la condition
+CFL.
+
 ## Construire le livre
 
 Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
