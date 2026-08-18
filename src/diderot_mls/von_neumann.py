@@ -14,8 +14,16 @@ We analyse the standard centred explicit scheme for
 
     u_tt = c^2 u_xx
 
-and its 2D extension.  The code is intentionally transparent rather than
+and its 2D extension. The code is intentionally transparent rather than
 optimised.
+
+Important endpoint nuance
+-------------------------
+The usual CFL inequalities below identify the region with no Fourier root of
+modulus strictly greater than one. At an exact boundary value, however, the
+characteristic polynomial can have a repeated root on the unit circle. The
+full root condition then requires extra care: arbitrary two-level data may
+contain a secular n*G**n term. See docs/von-neumann-stability-caveats.md.
 """
 
 from __future__ import annotations
@@ -67,7 +75,13 @@ def spectral_radius_1d(r, theta):
 
 
 def stable_for_all_modes_1d(r, atol=1e-12):
-    """Classical Von Neumann result for the centred 1D wave scheme: |r| <= 1."""
+    """Return whether the classical 1D CFL inequality |r| <= 1 is satisfied.
+
+    This means no Fourier root has modulus strictly greater than one. Exact
+    boundary cases can contain repeated unit-circle roots, so this Boolean is
+    deliberately a CFL-condition check rather than a proof of uniform
+    boundedness for every arbitrary pair of starting time levels.
+    """
     return bool(abs(float(r)) <= 1.0 + atol)
 
 
@@ -101,14 +115,18 @@ def spectral_radius_2d(rx, ry, theta_x, theta_y):
 
 
 def stable_for_all_modes_2d(rx, ry, atol=1e-12):
-    """Classical 2D condition rx^2 + ry^2 <= 1."""
+    """Return whether the classical 2D CFL inequality rx^2 + ry^2 <= 1 holds.
+
+    As in 1D, exact boundary points can require repeated-root analysis in
+    addition to the spectral-radius check.
+    """
     return bool(float(rx) ** 2 + float(ry) ** 2 <= 1.0 + atol)
 
 
 def omega_dt_1d(r, theta):
     """Dimensionless numerical angular frequency omega_num*dt.
 
-    In the stable regime the amplification roots can be written
+    In the stable oscillatory regime the amplification roots can be written
 
         G = exp(+- i omega_num dt)
 
@@ -137,7 +155,9 @@ def phase_velocity_ratio_1d(r, theta):
 
         v_phase,num / c = (omega_num*dt) / (r*theta).
 
-    The theta=0 limit is 1.
+    The theta=0 limit is 1. At the exact r=1, theta=pi endpoint the phase
+    relation is still meaningful for the compatible oscillatory branch, while
+    the repeated-root caveat remains relevant for arbitrary two-level data.
     """
     r = float(r)
     theta = np.asarray(theta, dtype=float)
