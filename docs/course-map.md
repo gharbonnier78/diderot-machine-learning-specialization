@@ -57,3 +57,12 @@ progressives : impulsion 1D, source harmonique, interference, passage en 2D,
 reflexion, modes propres et limite CFL. Il sert de premier laboratoire explicite
 pour le chemin Diderot `intuition -> mathematiques -> numerique -> experience`.
 
+### Laboratoire transverse : Von Neumann, CFL et dispersion numerique
+
+Le [`Von Neumann & CFL Lab`](von-neumann-cfl-lab.md) repart de l'instabilite
+observee dans le premier laboratoire et reconstruit le chemin
+`erreur -> Fourier -> nombre complexe -> valeur propre discrete -> facteur
+d'amplification -> spectre -> CFL -> dispersion`. Il relie ainsi l'analyse
+numerique a l'algebre lineaire, aux systemes dynamiques et au traitement du
+signal, avec un notebook de micro-experiences reproductibles.
+
