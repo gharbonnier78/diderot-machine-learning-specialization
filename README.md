@@ -55,6 +55,13 @@ Le notebook verifie chaque etape par de petites experiences :
 
 [`notebooks/waves/01_von_neumann_cfl_lab.ipynb`](notebooks/waves/01_von_neumann_cfl_lab.ipynb)
 
+Une note de precision traite le cas limite souvent masque par le raccourci
+`|G| <= 1` : aux racines doubles situees sur le cercle unite, la multiplicite
+compte et un terme seculaire peut apparaitre. Elle distingue donc la frontiere
+CFL theorique d'une marge pratique de calcul :
+
+[`docs/von-neumann-stability-caveats.md`](docs/von-neumann-stability-caveats.md)
+
 ## Construire le livre
 
 Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
