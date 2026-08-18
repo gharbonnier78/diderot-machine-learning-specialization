@@ -21,6 +21,28 @@ Version `0.1.0` : architecture complete du depot et premier chapitre finalise :
 Le plan global du livre se trouve dans [`docs/course-map.md`](docs/course-map.md)
 et l'avancement dans [`docs/progress.md`](docs/progress.md).
 
+## Laboratoires transverses Diderot
+
+Ces laboratoires partent d'une question concrete et reconstruisent le chemin
+`intuition -> mathematiques -> discretisation -> code -> experience -> limites`.
+
+### Wave Equation Toy Lab
+
+[🇫🇷 FR](docs/waves-toy-lab.md#fr) · [🇬🇧 EN](docs/waves-toy-lab.md#en) · [🇪🇸 ES](docs/waves-toy-lab.md#es) · [🇵🇹 PT](docs/waves-toy-lab.md#pt)
+
+Huit experiences progressives : impulsion 1D, source harmonique, deux sources
+et phase, propagation 2D, interferences, reflexions, modes propres et rupture
+volontaire de la condition CFL. Le guide relit explicitement les formules en
+langage courant et le notebook compagnon est executable :
+
+[`notebooks/waves/00_wave_equation_toy_lab.ipynb`](notebooks/waves/00_wave_equation_toy_lab.ipynb)
+
+Les approximations numeriques importantes sont rendues explicites dans
+[`docs/waves-numerical-caveats.md`](docs/waves-numerical-caveats.md) : source
+ponctuelle de cellule versus Dirac normalisee, points fantomes de Neumann,
+frequence continue versus frequence discrete et portee exacte de la condition
+CFL.
+
 ## Construire le livre
 
 Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
@@ -44,6 +66,7 @@ output/pdf/diderot-ml-specialization-v0.1.0.pdf
 book/          Sources LaTeX et figures originales
 chat-notes/    Syntheses pedagogiques des discussions
 docs/          Carte du cursus, progression et conventions
+notebooks/     Laboratoires interactifs reproductibles
 sources/       Manifeste de tracabilite des sources privees
 src/           Code Python reproductible
 tests/         Tests automatiques

@@ -46,5 +46,14 @@ redige du contenu restant a reconstruire depuis les notes personnelles.
 - biometrie, identite et detection de fraude ;
 - assurance qualite, risque residuel et observabilite ;
 - MMALS et apprentissage continu ;
+- simulation scientifique : observation -> EDP -> discretisation -> stabilite -> experience ;
+- ponts vers Fourier, valeurs propres, traitement du signal, automatique et systemes dynamiques ;
 - fiches de revision et travaux pratiques reproductibles.
+
+### Laboratoire transverse : equation d'onde
+
+Le [`Wave Equation Toy Lab`](waves-toy-lab.md) reconstruit huit experiences
+progressives : impulsion 1D, source harmonique, interference, passage en 2D,
+reflexion, modes propres et limite CFL. Il sert de premier laboratoire explicite
+pour le chemin Diderot `intuition -> mathematiques -> numerique -> experience`.
 
