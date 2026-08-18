@@ -43,6 +43,18 @@ ponctuelle de cellule versus Dirac normalisee, points fantomes de Neumann,
 frequence continue versus frequence discrete et portee exacte de la condition
 CFL.
 
+### Von Neumann & CFL Lab
+
+[🇫🇷 FR](docs/von-neumann-cfl-lab.md#fr) · [🇬🇧 EN](docs/von-neumann-cfl-lab.md#en) · [🇪🇸 ES](docs/von-neumann-cfl-lab.md#es) · [🇵🇹 PT](docs/von-neumann-cfl-lab.md#pt)
+
+Ce second laboratoire part de l'explosion observee dans l'experience CFL et
+reconstruit la condition de stabilite au lieu de la memoriser : erreur
+numerique, modes de Fourier, nombres complexes, symbole du stencil, facteur
+d'amplification, rayon spectral, condition CFL 1D/2D puis dispersion numerique.
+Le notebook verifie chaque etape par de petites experiences :
+
+[`notebooks/waves/01_von_neumann_cfl_lab.ipynb`](notebooks/waves/01_von_neumann_cfl_lab.ipynb)
+
 ## Construire le livre
 
 Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
