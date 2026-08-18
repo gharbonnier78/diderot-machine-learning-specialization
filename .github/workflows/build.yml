@@ -17,17 +17,24 @@ jobs:
         run: pip install nbconvert ipykernel
       - run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-french latexmk
       - run: make test
-      - name: Execute wave-equation notebook end to end
+      - name: Execute wave notebooks end to end
         env:
           MPLBACKEND: Agg
           PYTHONPATH: src
-        run: >-
-          jupyter nbconvert
-          --to notebook
-          --execute notebooks/waves/00_wave_equation_toy_lab.ipynb
-          --output wave-equation-toy-lab.executed.ipynb
-          --output-dir /tmp
-          --ExecutePreprocessor.timeout=600
+        run: |
+          set -euo pipefail
+          for nb in \
+            notebooks/waves/00_wave_equation_toy_lab.ipynb \
+            notebooks/waves/01_von_neumann_cfl_lab.ipynb
+          do
+            base="$(basename "$nb" .ipynb)"
+            jupyter nbconvert \
+              --to notebook \
+              --execute "$nb" \
+              --output "${base}.executed.ipynb" \
+              --output-dir /tmp \
+              --ExecutePreprocessor.timeout=600
+          done
       - run: make book
       - uses: actions/upload-artifact@v4
         with:

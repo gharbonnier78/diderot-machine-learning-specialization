@@ -1,12 +1,13 @@
 # Progression editoriale
 
-Derniere mise a jour : 2026-08-17.
+Derniere mise a jour : 2026-08-18.
 
 | Element | Etat | Prochaine action |
 |---|---|---|
 | Architecture Git/LaTeX/Python | Termine | Stabiliser apres plusieurs chapitres |
 | M3-W1-11 Gaussienne | Termine v0.1 | Ajouter TP interactif ulterieur |
-| Wave Equation Toy Lab | Candidat PR : guide + notebook + code + tests | Executer notebook, verifier animations, puis enrichir Von Neumann/Saint-Venant |
+| Wave Equation Toy Lab | Fusionne et valide : guide + 8 experiences + solveur + tests + execution notebook CI | Utiliser comme base pour les laboratoires de stabilite et de fidelite |
+| Von Neumann & CFL Lab | Candidat PR : derivation + notebook + helpers spectraux + tests | Executer le notebook en CI, relire la derivation puis fusionner |
 | M3-W1 K-means | Notes disponibles | Reconstruire les chapitres 1 a 3 |
 | M2-W4 arbres et ensembles | Notes disponibles | Consolider en partie II |
 | Parties I a III | Planifie | Integrer progressivement les conversations |
@@ -21,5 +22,5 @@ revision, tests du code associe et verification visuelle du PDF.
 
 Pour un laboratoire interactif, ajouter : execution complete du notebook,
 verification visuelle des figures/animations, controle des conditions numeriques
-(CFL ici) et au moins une experience volontaire montrant une limite ou un echec.
+et au moins une experience volontaire montrant une limite ou un echec.
 
