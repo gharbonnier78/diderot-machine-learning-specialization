@@ -33,6 +33,12 @@ class VonNeumannTests(unittest.TestCase):
         g1, g2 = amplification_roots_1d(0.65, 0.7 * np.pi)
         self.assertAlmostEqual(abs(g1 * g2 - 1.0), 0.0, places=12)
 
+    def test_exact_cfl_nyquist_mode_has_repeated_minus_one_root(self):
+        g1, g2 = amplification_roots_1d(1.0, np.pi)
+        self.assertAlmostEqual(abs(g1 + 1.0), 0.0, places=12)
+        self.assertAlmostEqual(abs(g2 + 1.0), 0.0, places=12)
+        self.assertAlmostEqual(abs(g1 - g2), 0.0, places=12)
+
     def test_r_equal_one_is_dispersionless_for_1d_resolved_branch(self):
         theta = np.linspace(0.01, np.pi, 200)
         ratio = phase_velocity_ratio_1d(1.0, theta)
