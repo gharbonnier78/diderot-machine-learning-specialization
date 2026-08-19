@@ -62,6 +62,19 @@ CFL theorique d'une marge pratique de calcul :
 
 [`docs/von-neumann-stability-caveats.md`](docs/von-neumann-stability-caveats.md)
 
+### Wave Lab 3 — convergence, verification et credibilite numerique
+
+[🇫🇷 FR](docs/wave-convergence-verification-lab.md#fr) · [🇬🇧 EN](docs/wave-convergence-verification-lab.md#en) · [🇪🇸 ES](docs/wave-convergence-verification-lab.md#es) · [🇵🇹 PT](docs/wave-convergence-verification-lab.md#pt)
+
+Ce troisieme laboratoire separe explicitement stabilite, convergence,
+verification numerique et validation physique. Il utilise un mode de Neumann
+ayant une solution analytique connue pour mesurer l'erreur, raffiner la grille,
+reconstruire l'ordre observe, etudier les points par longueur d'onde, l'erreur
+de phase et un diagnostic d'energie. Une derniere experience montre que le
+raffinement numerique ne corrige pas un mauvais parametre physique :
+
+[`notebooks/waves/02_convergence_verification_lab.ipynb`](notebooks/waves/02_convergence_verification_lab.ipynb)
+
 ## Construire le livre
 
 Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
