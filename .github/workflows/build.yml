@@ -25,7 +25,8 @@ jobs:
           set -euo pipefail
           for nb in \
             notebooks/waves/00_wave_equation_toy_lab.ipynb \
-            notebooks/waves/01_von_neumann_cfl_lab.ipynb
+            notebooks/waves/01_von_neumann_cfl_lab.ipynb \
+            notebooks/waves/02_convergence_verification_lab.ipynb
           do
             base="$(basename "$nb" .ipynb)"
             jupyter nbconvert \
