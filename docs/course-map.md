@@ -66,3 +66,12 @@ d'amplification -> spectre -> CFL -> dispersion`. Il relie ainsi l'analyse
 numerique a l'algebre lineaire, aux systemes dynamiques et au traitement du
 signal, avec un notebook de micro-experiences reproductibles.
 
+### Laboratoire transverse : convergence, verification et validation
+
+Le [`Wave Lab 3`](wave-convergence-verification-lab.md) ajoute le maillon
+`solution exacte -> mesure d'erreur -> raffinement -> ordre de convergence ->
+resolution par longueur d'onde -> phase -> energie -> budget d'erreurs`.
+Il distingue explicitement la verification numerique (resout-on correctement
+les equations choisies ?) de la validation physique (les equations sont-elles
+adequates pour le systeme reel ?), afin de preparer proprement le futur passage
+a Saint-Venant.
