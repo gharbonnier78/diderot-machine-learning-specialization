@@ -21,6 +21,16 @@ Version `0.1.0` : architecture complete du depot et premier chapitre finalise :
 Le plan global du livre se trouve dans [`docs/course-map.md`](docs/course-map.md)
 et l'avancement dans [`docs/progress.md`](docs/progress.md).
 
+## Entrées transversales
+
+### Vérification, compréhension et canonicalisation
+
+[`docs/canonicalisation-comprehension-humaine.md`](docs/canonicalisation-comprehension-humaine.md)
+formalise le principe **« C'est fermé quand je peux tout expliquer »** : un
+résultat vérifié automatiquement n'est pas encore une connaissance canonique.
+La note relie recherche robuste, pédagogie, trace des échecs utiles et
+production assistée par LLM/agents.
+
 ## Laboratoires transverses Diderot
 
 Ces laboratoires partent d'une question concrete et reconstruisent le chemin
