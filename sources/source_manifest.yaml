@@ -60,6 +60,21 @@ sources:
       Reference independante pour reconnaitre les octets canoniques des metadonnees
       LFW. La disponibilite d'un miroir et l'integrite scientifique des octets sont
       volontairement traitees comme deux questions distinctes.
+  - id: lfw-metadata-pinned-fallback-charlesreid1
+    kind: public_dataset_mirror
+    repository: "charlesreid1/in-your-face"
+    commit: "00d3f2e4bdcc3ef8a851e5e133cde29d2f574f15"
+    paths:
+      - data/peopleDevTrain.txt
+      - data/peopleDevTest.txt
+    accessed: "2026-08-27"
+    publication: reference_only
+    evidence_role: availability_fallback_only
+    integrity_rule: must_match_torchvision_canonical_md5
+    note: >-
+      Fallback HTTPS immuable utilise seulement si le site UMass n'est pas joignable.
+      Ce miroir n'est pas une autorite scientifique; les octets ne sont acceptes que
+      s'ils correspondent exactement aux MD5 canoniques publies par torchvision.
   - id: lfw-kaggle-jessicali9530-v4
     kind: public_dataset_mirror
     dataset_handle: "jessicali9530/lfw-dataset/versions/4"
