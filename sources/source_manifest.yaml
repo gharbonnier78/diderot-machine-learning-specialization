@@ -1,5 +1,5 @@
 schema_version: 1
-updated: "2026-08-17"
+updated: "2026-08-27"
 sources:
   - id: m3-w1-11-video
     kind: private_course_video
@@ -29,4 +29,45 @@ sources:
       Les captures fournies dans la conversation ne sont pas redistribuees; le
       laboratoire publie uniquement du texte, du code et des derivations
       pedagogiques originales.
-
+  - id: lfw-umass-tech-report-07-49
+    kind: public_academic_reference
+    title: "Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments"
+    authors: ["Gary B. Huang", "Manu Ramesh", "Tamara Berg", "Erik Learned-Miller"]
+    institution: "University of Massachusetts Amherst"
+    year: 2007
+    url: "http://vis-www.cs.umass.edu/lfw/"
+    accessed: "2026-08-27"
+    publication: reference_only
+    evidence_role: dataset_protocol_authority
+    note: >-
+      Source scientifique de reference pour LFW et ses vues d'evaluation. Study 1B
+      utilise la frontiere d'identites View 1 comme contrainte de provenance/split,
+      sans pretendre reproduire un leaderboard LFW officiel.
+  - id: torchvision-lfw-integrity-reference-0.25
+    kind: public_software_documentation
+    organization: "PyTorch"
+    title: "torchvision.datasets.lfw source"
+    url: "https://docs.pytorch.org/vision/0.25/_modules/torchvision/datasets/lfw.html"
+    accessed: "2026-08-27"
+    publication: reference_only
+    evidence_role: independent_integrity_reference
+    canonical_md5:
+      peopleDevTrain.txt: "54eaac34beb6d042ed3a7d883e247a21"
+      peopleDevTest.txt: "e4bf5be0a43b5dcd9dc5ccfcb8fb19c5"
+      pairsDevTrain.txt: "4f27cbf15b2da4a85c1907eb4181ad21"
+      pairsDevTest.txt: "5132f7440eb68cf58910c8a45a2ac10b"
+    note: >-
+      Reference independante pour reconnaitre les octets canoniques des metadonnees
+      LFW. La disponibilite d'un miroir et l'integrite scientifique des octets sont
+      volontairement traitees comme deux questions distinctes.
+  - id: lfw-kaggle-jessicali9530-v4
+    kind: public_dataset_mirror
+    dataset_handle: "jessicali9530/lfw-dataset/versions/4"
+    accessed: "2026-08-27"
+    publication: reference_only
+    evidence_role: operational_image_mirror
+    note: >-
+      Miroir operationnel deja utilise dans le programme. Le preflight Study 1B du
+      2026-08-27 a montre que son packaging ne fournit pas necessairement les fichiers
+      peopleDevTrain.txt / peopleDevTest.txt; il ne definit donc pas a lui seul la
+      frontiere View 1.
