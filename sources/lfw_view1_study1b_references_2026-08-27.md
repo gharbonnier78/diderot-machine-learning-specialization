@@ -47,6 +47,8 @@ A fallback source was then introduced:
 
 This mirror is **not treated as a scientific authority**. It is acceptable only because the downloaded bytes are checked against the canonical MD5 values independently published by torchvision. If neither UMass nor a mirror produces those canonical bytes, Study 1B remains blocked.
 
+The next GitHub preflight provided the expected evidence: the UMass hostname remained unavailable on the runner, the commit-pinned fallback was used, and both files matched the torchvision checksums exactly. The observed identity counts were 4038 for `peopleDevTrain` and 1711 for `peopleDevTest`, so the fallback changed byte availability, not the scientific identity boundary.
+
 ## 4. Operational image mirror — Kaggle LFW v4
 
 Study 0/Study 1A already used:
@@ -66,7 +68,15 @@ A reproducible ML experiment should separate four notions that are often conflat
 
 This separation reduces dependency on a single hosting service and makes source replacement auditable without changing the scientific object. A fifth practical concept is useful as well: **availability fallback**, whose role is only to provide canonical bytes when the primary host is temporarily inaccessible.
 
-## 6. Study 1B specific rule
+There is a second operational lesson: preflight dependencies should be proportional to the task. Metadata/hash/image-manifest validation does not require PyTorch/CUDA merely because later model extraction might. Splitting these environments reduced a large, unnecessary dependency download without changing the experiment.
+
+## 6. Current non-outcome evidence and remaining caution
+
+The successful preflight materialised all requested TRAIN/VALIDATION/SCREEN/TEST pair graphs and found no exact cross-role duplicate. Its perceptual dHash candidate generator nevertheless identified 18 cross-role near-duplicate candidates for explicit adjudication. That is intentionally **not** interpreted as 18 leaks: perceptual-hash proximity is a screening signal and still needs a second-stage review.
+
+A two-dataset, 100-bootstrap cost pilot took about 5.4 seconds per synthetic dataset on the runner. It has no scientific gate authority, but it shows that a naive scalar extrapolation to the frozen 10,000-replicate / 4,000-dataset coverage-power plan would be expensive. The proper response is implementation acceleration and resumable sharding, not silent reduction of the preregistered statistical design.
+
+## 7. Study 1B specific rule
 
 Do not reconstruct `peopleDevTrain` / `peopleDevTest` identity membership from pair files. Pair files are task samples and need not enumerate every identity. Missing metadata is therefore a fail-closed provenance blocker, not permission to infer a replacement split.
 
