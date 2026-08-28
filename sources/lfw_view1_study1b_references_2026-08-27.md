@@ -1,8 +1,8 @@
 # LFW View 1 — Study 1B trusted source references
 
-Date: 2026-08-27
+Date: 2026-08-27, updated 2026-08-28
 
-Purpose: capitalise the reliable references used to repair and audit the non-outcome Study 1B preflight in `siamese-embedding-compression-lab`.
+Purpose: capitalise the reliable references and engineering/scientific lessons used to repair and audit the non-outcome Study 1B preflight in `siamese-embedding-compression-lab`.
 
 ## 1. Dataset/protocol authority — University of Massachusetts Amherst
 
@@ -70,14 +70,48 @@ This separation reduces dependency on a single hosting service and makes source 
 
 There is a second operational lesson: preflight dependencies should be proportional to the task. Metadata/hash/image-manifest validation does not require PyTorch/CUDA merely because later model extraction might. Splitting these environments reduced a large, unnecessary dependency download without changing the experiment.
 
-## 6. Current non-outcome evidence and remaining caution
+## 6. From perceptual screening to deterministic second-stage review
 
-The successful preflight materialised all requested TRAIN/VALIDATION/SCREEN/TEST pair graphs and found no exact cross-role duplicate. Its perceptual dHash candidate generator nevertheless identified 18 cross-role near-duplicate candidates for explicit adjudication. That is intentionally **not** interpreted as 18 leaks: perceptual-hash proximity is a screening signal and still needs a second-stage review.
+The source preflight found no exact cross-role byte duplicate, but a deliberately sensitive dHash64 filter (`Hamming <= 4`) produced 18 **quasi-doublons candidats**. This is a useful distinction: a perceptual hash is a triage mechanism, not proof of leakage.
 
-A two-dataset, 100-bootstrap cost pilot took about 5.4 seconds per synthetic dataset on the runner. It has no scientific gate authority, but it shows that a naive scalar extrapolation to the frozen 10,000-replicate / 4,000-dataset coverage-power plan would be expensive. The proper response is implementation acceleration and resumable sharding, not silent reduction of the preregistered statistical design.
+A second-stage rule was frozen before reading the candidate metrics. It compares the central 80% grayscale image, resized to 128x128, through three model-free quantities: normalized root-mean-square error (NRMSE), pixel correlation and gradient-magnitude correlation. The frozen rule is:
 
-## 7. Study 1B specific rule
+- NRMSE <= 0.08;
+- pixel correlation >= 0.985;
+- gradient correlation >= 0.97;
+- 3/3 => blocking duplicate-like case;
+- 2/3 => explicit review required;
+- 0-1/3 => candidate cleared by this rule.
 
-Do not reconstruct `peopleDevTrain` / `peopleDevTest` identity membership from pair files. Pair files are task samples and need not enumerate every identity. Missing metadata is therefore a fail-closed provenance blocker, not permission to infer a replacement split.
+On the 18 candidates the result was 16 cleared, 1 ambiguous and 1 blocking. The blocking SCREEN/TRAIN pair had dHash distance 1, NRMSE about 0.01694, pixel correlation about 0.99680 and gradient correlation about 0.97033. The ambiguous TEST/TRAIN pair passed two criteria but not the gradient threshold. Because these thresholds were frozen before the observations, the correct response is **not to retune the thresholds until the blocker disappears**; it is to keep the preflight blocked and explicitly amend the data boundary if a conservative quarantine is selected.
+
+This illustrates a general reproducibility principle: a preflight can legitimately discover a reason not to launch an experiment. A failed preflight is useful evidence, not a failed research programme.
+
+## 7. Accélérer le rééchantillonnage sans changer l'estimateur
+
+The initial scalar subject-slot bootstrap cost pilot took about 5.4 s per synthetic dataset for only 100 bootstrap replications. The statistical design, however, freezes 10,000 bootstrap replications and thousands of simulated datasets. Reducing those counts because execution is expensive would change the experiment.
+
+Instead, the implementation was accelerated while preserving the statistical object:
+
+- the subject multiplicity draw remains one multinomial draw per replication and in the same RNG order;
+- genuine edges keep weight `m_i`, impostor edges keep `m_i*m_j`;
+- candidate and reference routes receive the same subject draw;
+- the whole-tie-block threshold rule at target FMR is unchanged;
+- no degenerate replication is silently redrawn;
+- no unobserved pair edge is synthesized.
+
+An exact oracle test compares the accelerated path with the scalar reference on 257 replications including distance ties and potential degenerate draws. The summary quantities must match exactly before the accelerated path is admitted.
+
+Three engineering iterations are informative. A first vectorized implementation reduced the 100-replication pilot to roughly 0.45 s/dataset. A broader batch-vectorization attempt regressed to about 0.72 s/dataset, and was therefore not retained as an improvement. A low-FMR prefix strategy then reduced the same pilot to about 0.22-0.23 s/dataset while keeping the exact oracle green. At a 1% target FMR, the threshold search usually needs only the beginning of the sorted impostor distances; the implementation therefore computes the full impostor total weight once, scans a deterministic prefix, preserves whole tie blocks, and expands that prefix without approximation only if necessary.
+
+The lesson is broader than this experiment: **vectorization is not automatically faster**. Performance changes should themselves be treated as experiments with a correctness oracle, a cost measurement and a reversible decision.
+
+## 8. Current boundary
+
+The complete coverage and power simulation lots have **not** been launched. The deterministic quasi-duplicate review currently blocks the data preflight. A draft conservative amendment proposes identity-level quarantine of the four pseudonymous identities involved in the blocking and ambiguous pairs, with no replacement identities and unchanged requested pair counts; it is deliberately non-active until reviewed and explicitly authorized.
 
 No biometric/compression Study 1B SCREEN or TEST outcome is contained in this entry.
+
+## 9. Study 1B specific rule
+
+Do not reconstruct `peopleDevTrain` / `peopleDevTest` identity membership from pair files. Pair files are task samples and need not enumerate every identity. Missing metadata is therefore a fail-closed provenance blocker, not permission to infer a replacement split.
