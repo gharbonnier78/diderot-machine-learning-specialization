@@ -1,6 +1,6 @@
 # LFW View 1 — Study 1B trusted source references
 
-Date: 2026-08-27, updated 2026-08-28
+Date: 2026-08-27, updated 2026-08-30
 
 Purpose: capitalise the reliable references and engineering/scientific lessons used to repair and audit the non-outcome Study 1B preflight in `siamese-embedding-compression-lab`.
 
@@ -83,7 +83,9 @@ A second-stage rule was frozen before reading the candidate metrics. It compares
 - 2/3 => explicit review required;
 - 0-1/3 => candidate cleared by this rule.
 
-On the 18 candidates the result was 16 cleared, 1 ambiguous and 1 blocking. The blocking SCREEN/TRAIN pair had dHash distance 1, NRMSE about 0.01694, pixel correlation about 0.99680 and gradient correlation about 0.97033. The ambiguous TEST/TRAIN pair passed two criteria but not the gradient threshold. Because these thresholds were frozen before the observations, the correct response is **not to retune the thresholds until the blocker disappears**; it is to keep the preflight blocked and explicitly amend the data boundary if a conservative quarantine is selected.
+On the 18 candidates the result was 16 cleared, 1 ambiguous and 1 blocking. The blocking SCREEN/TRAIN pair had dHash distance 1, NRMSE about 0.01694, pixel correlation about 0.99680 and gradient correlation about 0.97033. The ambiguous TEST/TRAIN pair passed two criteria but not the gradient threshold. Because these thresholds were frozen before the observations, the correct response was **not to retune the thresholds until the blocker disappeared**; it was to remain fail-closed, obtain human review limited to the same-photograph/derivative question, propose a conservative identity-level quarantine, submit the amendment to independent review, and require explicit human GO before activation.
+
+That sequence was subsequently completed. The active amendment quarantines the four implicated pseudonymous identities, with no replacement, giving active identity counts TRAIN 2825, VALIDATION 606, SCREEN 604 and TEST 1710. Requested pair counts and statistical thresholds remain unchanged.
 
 This illustrates a general reproducibility principle: a preflight can legitimately discover a reason not to launch an experiment. A failed preflight is useful evidence, not a failed research programme.
 
@@ -106,11 +108,20 @@ Three engineering iterations are informative. A first vectorized implementation 
 
 The lesson is broader than this experiment: **vectorization is not automatically faster**. Performance changes should themselves be treated as experiments with a correctness oracle, a cost measurement and a reversible decision.
 
-## 8. Current boundary
+## 8. Current non-outcome boundary and statistical preflight
 
-The complete coverage and power simulation lots have **not** been launched. The deterministic quasi-duplicate review currently blocks the data preflight. A draft conservative amendment proposes identity-level quarantine of the four pseudonymous identities involved in the blocking and ambiguous pairs, with no replacement identities and unchanged requested pair counts; it is deliberately non-active until reviewed and explicitly authorized.
+The earlier draft-amendment state is now superseded by an explicitly reviewed and activated data-boundary amendment. The amended non-outcome preflight and the repository assurance controls pass on the active branch. This does **not** authorize Study 1B biometric SCREEN/TEST outcomes.
 
-No biometric/compression Study 1B SCREEN or TEST outcome is contained in this entry.
+The known-truth coverage simulation has also reached its frozen first checkpoint of 1000 datasets per scenario. All five cells pass the preregistered gate: exact Clopper-Pearson lower 95% bound at least 0.93 and degenerate fraction at most 0.001. The observed empirical coverages were 98.3%, 99.9%, 99.2%, 99.4% and 98.6% across the five frozen scenarios. Because the stop rule was `first_checkpoint_where_all_cells_pass`, coverage closes at 1000 rather than continuing opportunistically to 2000 or 4000.
+
+These are **not** compression-performance results. They validate the statistical procedure on synthetic datasets where the true Δ is known. The distinction is documented pedagogically in:
+
+- `docs/statistical-coverage-known-truth.md`;
+- `docs/statistical-power-before-outcomes.md`.
+
+The a-priori power preflight has been launched separately with two frozen effect scenarios (`Δ=0` and `Δ=0.01`), 4000 simulated datasets per scenario, five method seeds, 10,000 bootstrap replications per dataset, and a requirement that all five seed-specific UCBs remain below the 0.03 non-inferiority margin. Each simulated dataset uses one common raw/reference realization shared by all five candidate seeds.
+
+No power verdict is asserted here until its aggregation completes. No biometric/compression Study 1B SCREEN or TEST outcome is contained in this entry.
 
 ## 9. Study 1B specific rule
 
