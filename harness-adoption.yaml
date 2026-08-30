@@ -1,0 +1,65 @@
+schema_version: "0.1"
+
+harness:
+  repository: gharbonnier78/scientific-research-harness
+  ref: "e542c05814b0a317716c81dc9e22064c61e7d47a"
+  entrypoint: HARNESS.md
+  status: "provisional_pin_to_pr18_head"
+  upgrade_rule: "Adopt a reviewed immutable merge/tag ref explicitly after upstream review; never follow main silently."
+
+consumer:
+  repository: "gharbonnier78/diderot-machine-learning-specialization"
+  project_id: "diderot-machine-learning-specialization"
+  instruction_entrypoints:
+    - AGENTS.md
+    - CLAUDE.md
+
+authority:
+  sources:
+    - id: "course-source-manifest"
+      reference: "sources/source_manifest.yaml"
+      role: "Authoritative/declared source inventory for the specialization and its derived explanations."
+    - id: "canonical-diderot-notation-atlas"
+      reference: "gharbonnier78/mmals-ml-wiki/mathematics/notation/registry.json"
+      role: "Canonical cross-domain notation-learning registry; the book must not create a competing registry."
+  domain_experts: []
+  prohibited_substitution:
+    - "The harness, Diderot, ChatGPT and Claude do not replace the declared course/scientific sources or accountable human review."
+
+artifacts:
+  claims: []
+  evidence: []
+  scientific_gates: []
+  chronicle:
+    - docs/progress.md
+  pedagogy:
+    - book/
+    - docs/
+    - chat-notes/
+  handoff: null
+
+execution:
+  environment_lock:
+    - requirements.txt
+    - pyproject.toml
+  replay_commands:
+    - "make test"
+    - "make book"
+  randomness:
+    status: "not_applicable"
+    root_entropy_policy: null
+    lineage_artifact: null
+  concurrency:
+    status: "not_applicable"
+    reference_path: null
+    equivalence_evidence: null
+
+local_extensions:
+  - "docs/harness-meta.md"
+
+deviations: []
+
+adoption:
+  adopted_at: "2026-08-30"
+  adopted_by: "ChatGPT with explicit user authorization"
+  notes: "The cross-domain mathematical notation atlas lives in mmals-ml-wiki. This book retains publication-specific notation views but should feed durable notation learning back to the canonical atlas."
