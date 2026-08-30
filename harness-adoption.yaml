@@ -2,7 +2,7 @@ schema_version: "0.1"
 
 harness:
   repository: gharbonnier78/scientific-research-harness
-  ref: "e542c05814b0a317716c81dc9e22064c61e7d47a"
+  ref: "2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f"
   entrypoint: HARNESS.md
   status: "provisional_pin_to_pr18_head"
   upgrade_rule: "Adopt a reviewed immutable merge/tag ref explicitly after upstream review; never follow main silently."
