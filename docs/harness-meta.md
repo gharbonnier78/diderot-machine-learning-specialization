@@ -24,9 +24,9 @@ harness commit is pinned in `harness-adoption.yaml` so a future harness change i
 dependency upgrade rather than silent drift.
 
 The current provisional pin is
-`e542c05814b0a317716c81dc9e22064c61e7d47a`, the head of upstream harness PR #18. After
-review/merge, this repository should explicitly upgrade to the reviewed immutable commit or
-tag.
+`2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f`, the current head of upstream harness PR #18.
+After review/merge, this repository should explicitly upgrade to the reviewed immutable
+commit or tag.
 
 ## Mathematical notation
 
