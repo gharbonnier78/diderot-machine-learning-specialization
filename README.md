@@ -75,6 +75,15 @@ raffinement numerique ne corrige pas un mauvais parametre physique :
 
 [`notebooks/waves/02_convergence_verification_lab.ipynb`](notebooks/waves/02_convergence_verification_lab.ipynb)
 
+### Préflight statistique — couverture et puissance avant les outcomes
+
+Deux nouvelles entrées capitalisent la logique statistique utilisée dans Study 1B avant toute lecture des performances biométriques réelles :
+
+- [`Couverture statistique à vérité connue`](docs/statistical-coverage-known-truth.md) : vérifier par simulation que l'intervalle bootstrap contient suffisamment souvent la vraie valeur que le simulateur connaît ;
+- [`Puissance statistique a priori`](docs/statistical-power-before-outcomes.md) : vérifier que le plan d'étude a une probabilité suffisante de satisfaire sa règle scientifique complète lorsque l'effet non inférieur supposé est réellement présent.
+
+La distinction structurante est : **qualifier l'instrument statistique et la capacité du plan d'expérience ne préjuge pas du résultat de compression `128D vs raw512`.**
+
 ## Construire le livre
 
 Prerequis : pdfLaTeX, Python 3, NumPy et Matplotlib.
