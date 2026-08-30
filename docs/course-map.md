@@ -45,6 +45,7 @@ redige du contenu restant a reconstruire depuis les notes personnelles.
 - geometrie, probabilites et theorie de l'information ;
 - biometrie, identite et detection de fraude ;
 - assurance qualite, risque residuel et observabilite ;
+- assurance statistique : calibration, couverture, puissance et décision sous incertitude ;
 - MMALS et apprentissage continu ;
 - simulation scientifique : observation -> EDP -> discretisation -> stabilite -> experience ;
 - ponts vers Fourier, valeurs propres, traitement du signal, automatique et systemes dynamiques ;
@@ -75,3 +76,19 @@ Il distingue explicitement la verification numerique (resout-on correctement
 les equations choisies ?) de la validation physique (les equations sont-elles
 adequates pour le systeme reel ?), afin de preparer proprement le futur passage
 a Saint-Venant.
+
+### Fil transverse : qualifier la statistique avant d'ouvrir les outcomes
+
+La note [`Couverture statistique à vérité connue`](statistical-coverage-known-truth.md)
+reconstruit la question de calibration : lorsqu'un simulateur connaît la vraie
+valeur d'un estimand, l'intervalle produit par notre procédure la contient-il
+assez souvent, y compris sous dépendances et près des frontières de décision ?
+
+La note [`Puissance statistique a priori`](statistical-power-before-outcomes.md)
+pose ensuite la question de capacité du plan d'expérience : si un effet d'intérêt
+est réellement présent, quelle est la probabilité que la règle de décision
+complète — estimateur, incertitude, marge et multiplicité des seeds comprises —
+parvienne à le démontrer ?
+
+Le fil pédagogique est volontairement :
+`estimand -> incertitude -> calibration/couverture -> puissance -> seulement ensuite outcome réel`.
