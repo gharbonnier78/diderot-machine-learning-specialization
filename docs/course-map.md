@@ -50,6 +50,11 @@ redige du contenu restant a reconstruire depuis les notes personnelles.
 - ponts vers Fourier, valeurs propres, traitement du signal, automatique et systemes dynamiques ;
 - fiches de revision et travaux pratiques reproductibles.
 
+Les sujets transverses dont la source est deja capitalisee mais dont le chapitre
+ou le laboratoire n'est pas encore finalise sont suivis dans
+[`studies/`](../studies/README.md), avec conservation explicite du chemin
+`source -> lecture -> review -> hypothese -> protocole -> evidence -> livre`.
+
 ### Laboratoire transverse : equation d'onde
 
 Le [`Wave Equation Toy Lab`](waves-toy-lab.md) reconstruit huit experiences
@@ -84,5 +89,10 @@ reseaux de neurones puis reconstruit le chemin
 `inductive bias -> varietes -> groupes de Lie -> actions -> espaces homogenes ->
 operateurs equivariants -> G-CNN -> discretisation -> operateurs tropicaux`.
 Elle sert de pont pedagogique entre la Machine Learning Specialization et le fil
-Diderot `structure-preserving ML`. Le futur laboratoire associe devra mesurer
-l'erreur d'equivariance et comparer CNN, augmentation de donnees et G-CNN.
+Diderot `structure-preserving ML`.
+
+La suite n'est plus un simple TODO : elle est détaillée dans
+[`studies/smets-equivariance-to-gcnn-lab.md`](../studies/smets-equivariance-to-gcnn-lab.md),
+qui preserve le chemin complet depuis la source et la review de la PR #9 jusqu'au
+chapitre candidat, au protocole CNN vs augmentation vs G-CNN, aux ablations, à la
+review des preuves et à l'intégration finale dans le livre.
