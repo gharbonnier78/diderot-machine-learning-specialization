@@ -10,9 +10,9 @@ Before substantive work:
 6. Agent-generated explanations or notation entries remain draft until reviewed; do not promote them because the prose is persuasive.
 
 Pinned harness entrypoint:
-`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f/HARNESS.md`
+`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/e80097fe8eb88c9e9340732683710ba1dc2ae008/HARNESS.md`
 
 Pinned notation contract:
-`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f/pedagogy/MATHEMATICAL_NOTATION_CAPITALIZATION.md`
+`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/e80097fe8eb88c9e9340732683710ba1dc2ae008/pedagogy/MATHEMATICAL_NOTATION_CAPITALIZATION.md`
 
 If the pinned dependency cannot be loaded, report it before claiming harness compliance.
