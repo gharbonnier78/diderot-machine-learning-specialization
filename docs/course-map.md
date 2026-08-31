@@ -1,7 +1,9 @@
 # Carte editoriale du livre
 
 Ce plan couvre la specialisation complete tout en distinguant le contenu deja
-redige du contenu restant a reconstruire depuis les notes personnelles.
+redige du contenu restant a reconstruire depuis les notes personnelles. Il est
+complete par une couche de notions transverses afin qu'un concept puisse etre
+retrouve independamment du cours dans lequel il a ete rencontre.
 
 ## Partie I - Apprentissage supervise : regression et classification
 
@@ -39,6 +41,44 @@ redige du contenu restant a reconstruire depuis les notes personnelles.
 8. Etats, actions, recompenses et equation de Bellman
 9. Deep Q-learning
 
+## Partie IV - Au-dela de la MLS : representations, attention et modeles d'etat
+
+Cette partie ne pretend pas appartenir a la Machine Learning Specialization initiale. Elle documente
+les notions devenues necessaires pour poursuivre vers la Deep Learning Specialization, les
+Transformers, la vision, JEPA et les world models.
+
+1. Representations vectorielles
+   - feature, representation, embedding, hidden representation ;
+   - parametres versus activations ;
+   - geometrie des representations et PCA.
+2. Sequences et contexte
+   - tokenisation et tokens ;
+   - position ;
+   - hidden state et memoire de sequence.
+3. Attention
+   - Query / Key / Value ;
+   - produit scalaire comme compatibilite ;
+   - scaled dot-product attention ;
+   - self-attention et multi-head attention.
+4. Transformer
+   - bloc attention + residual + normalisation + MLP ;
+   - encoder, decoder, encoder-decoder ;
+   - Transformer versus LLM.
+5. Vision et representations spatiales
+   - patch tokens ;
+   - token `[CLS]` ;
+   - structure semantique emergente des representations.
+6. Etat latent et dynamique
+   - observation, historique, hidden state, state representation ;
+   - belief state en POMDP ;
+   - suffisance predictive ;
+   - predictive representation learning / JEPA ;
+   - modele dynamique latent et world model.
+
+Le point d'entree est [`concepts/README.md`](concepts/README.md), avec un premier guide detaille
+[`concepts/representations-transformers.md`](concepts/representations-transformers.md) et une relecture
+des fondations dans [`concepts/ml-foundations-revisited.md`](concepts/ml-foundations-revisited.md).
+
 ## Fils transverses Diderot ML
 
 - lecture mathematique des formules ;
@@ -47,8 +87,20 @@ redige du contenu restant a reconstruire depuis les notes personnelles.
 - assurance qualite, risque residuel et observabilite ;
 - MMALS et apprentissage continu ;
 - simulation scientifique : observation -> EDP -> discretisation -> stabilite -> experience ;
+- representations : signal -> token -> embedding -> contexte -> representation latente ;
+- decision sous observation partielle : observation -> historique -> belief/state representation -> prediction/action ;
 - ponts vers Fourier, valeurs propres, traitement du signal, automatique et systemes dynamiques ;
 - fiches de revision et travaux pratiques reproductibles.
+
+### Colonne vertebrale de notions
+
+Diderot ML distingue desormais la progression par cours de la progression par notions. Une chaine
+pedagogique utile pour les architectures modernes est :
+
+`vecteur -> matrice/transformation -> produit scalaire -> reseau de neurones -> embedding -> softmax -> attention -> representation contextualisee -> etat latent -> dynamique latente`.
+
+Cette chaine sert de carte, pas de preuve qu'un concept implique automatiquement le suivant. Chaque
+maillon doit conserver ses hypotheses, limites et exemples propres.
 
 ### Laboratoire transverse : equation d'onde
 
@@ -79,10 +131,20 @@ a Saint-Venant.
 ### Lecture transverse : geometrie, groupes de Lie et equivariance
 
 La note [`Mathematics of Neural Networks — Smets`](../chat-notes/2026-08-31-smets-mathematics-of-neural-networks.md)
-capitalise une source graduate-level qui part des fondations familières des
+capitalise une source graduate-level qui part des fondations familieres des
 reseaux de neurones puis reconstruit le chemin
 `inductive bias -> varietes -> groupes de Lie -> actions -> espaces homogenes ->
 operateurs equivariants -> G-CNN -> discretisation -> operateurs tropicaux`.
 Elle sert de pont pedagogique entre la Machine Learning Specialization et le fil
 Diderot `structure-preserving ML`. Le futur laboratoire associe devra mesurer
 l'erreur d'equivariance et comparer CNN, augmentation de donnees et G-CNN.
+
+### Lecture transverse : representations, attention et Transformer
+
+Le guide [`Representations, attention et Transformer`](concepts/representations-transformers.md)
+reconstruit le chemin
+`signal -> token -> embedding -> Q/K/V -> attention -> representation contextualisee -> representation latente`.
+Il relie les notions deja apprises (matrices, produit scalaire, softmax, reseaux de neurones) aux
+architectures modernes, puis distingue explicitement representation latente, state representation et
+belief state. Il prepare des experiences ulterieures sur attention minimale, Vision Transformer,
+JEPA et world models.

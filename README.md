@@ -21,6 +21,36 @@ Version `0.1.0` : architecture complete du depot et premier chapitre finalise :
 Le plan global du livre se trouve dans [`docs/course-map.md`](docs/course-map.md)
 et l'avancement dans [`docs/progress.md`](docs/progress.md).
 
+## Couche conceptuelle Diderot
+
+La progression par cours est desormais completee par une progression par
+**notions reutilisables**. Le point d'entree est
+[`docs/concepts/README.md`](docs/concepts/README.md).
+
+Chaque fiche cherche a reconstruire le chemin :
+
+```text
+question -> intuition -> definition -> mathematiques -> exemple minimal
+         -> confusions -> liens -> limites -> sources
+```
+
+Deux premiers ensembles servent de pont entre la Machine Learning
+Specialization et les architectures modernes :
+
+- [`Fondations ML revisitees`](docs/concepts/ml-foundations-revisited.md) :
+  vecteurs, matrices, produit scalaire, feature/representation/embedding,
+  parametres versus activations, softmax, probabilite/densite/vraisemblance,
+  PCA, observation/etat/historique et hidden state versus belief state ;
+- [`Representations, attention et Transformer`](docs/concepts/representations-transformers.md) :
+  tokenisation, embeddings, positions, Query/Key/Value, scaled dot-product
+  attention, self-attention, multi-head attention, bloc Transformer, patch
+  tokens, `[CLS]`, representations latentes et ponts vers POMDP, JEPA et world
+  models.
+
+La finalite n'est pas de construire un glossaire LLM, mais une carte de briques
+reutilisables entre ML, deep learning, vision, representation learning,
+systemes dynamiques et apprentissage continu.
+
 ## Laboratoires transverses Diderot
 
 Ces laboratoires partent d'une question concrete et reconstruisent le chemin
@@ -97,9 +127,9 @@ output/pdf/diderot-ml-specialization-v0.1.0.pdf
 ```text
 book/          Sources LaTeX et figures originales
 chat-notes/    Syntheses pedagogiques des discussions
-docs/          Carte du cursus, progression et conventions
+docs/          Carte du cursus, progression, concepts et conventions
 notebooks/     Laboratoires interactifs reproductibles
-sources/       Manifeste de tracabilite des sources privees
+sources/       Manifeste de tracabilite des sources privees et publiques
 src/           Code Python reproductible
 tests/         Tests automatiques
 output/pdf/    Livre compile
@@ -112,6 +142,10 @@ dans ce depot. Elles restent des sources privees et sont seulement referencees
 par leurs metadonnees et empreintes cryptographiques. Le texte du livre est une
 reformulation pedagogique originale, enrichie d'explications, de derivations et
 d'exercices propres.
+
+Les sources publiques (articles, papiers et pages de cours) sont egalement
+referencees dans le manifeste. Elles servent de provenance et ne sont pas
+reproduites integralement dans le depot.
 
 ## Auteur
 
