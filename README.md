@@ -21,6 +21,12 @@ Version `0.1.0` : architecture complete du depot et premier chapitre finalise :
 Le plan global du livre se trouve dans [`docs/course-map.md`](docs/course-map.md)
 et l'avancement dans [`docs/progress.md`](docs/progress.md).
 
+Les sujets deja capitalises mais pas encore transformes en chapitres ou labs
+termines sont conserves dans [`studies/`](studies/README.md). Cet espace garde la
+trace complete `source -> lecture -> review -> hypothese -> chapitre -> protocole
+experimental -> preuves -> integration` au lieu de reduire les travaux futurs a
+une simple liste de TODO.
+
 ## Harness et atlas des notations
 
 Le depot adopte le `scientific-research-harness` par une reference immuable
@@ -114,6 +120,7 @@ output/pdf/diderot-ml-specialization-v0.1.0.pdf
 book/          Sources LaTeX et figures originales
 chat-notes/    Syntheses pedagogiques des discussions
 docs/          Carte du cursus, progression et conventions
+studies/       Etudes a venir : source -> review -> chapitre/lab -> preuves
 notebooks/     Laboratoires interactifs reproductibles
 sources/       Manifeste de tracabilite des sources privees
 src/           Code Python reproductible

@@ -9,7 +9,8 @@ Derniere mise a jour : 2026-08-31.
 | Wave Equation Toy Lab | Fusionne et valide : guide + 8 experiences + solveur + tests + execution notebook CI | Utiliser comme base pour les laboratoires de stabilite et de fidelite |
 | Von Neumann & CFL Lab | Fusionne et valide : derivation + notebook + helpers spectraux + tests + execution CI | Reutiliser pour phase, dispersion et limites de stabilite |
 | Wave Lab 3 — convergence / verification | Candidat PR : solution exacte + raffinement + ordre observe + PPW + phase + energie + budget d'erreurs | Executer notebook en CI, relire les resultats de convergence et fusionner si coherents |
-| Lecture Smets — Mathematics of Neural Networks | Source publique tracee + SHA-256 local + analyse pedagogique Diderot + lien arXiv/code | Transformer ulterieurement le fil equivariance en chapitre/lab falsifiable CNN vs augmentation vs G-CNN |
+| Espace `studies/` | Candidat PR : cycle de vie des etudes a venir, gates et regles source / Diderot / experiment / evidence ; review independante PR #11 favorable avec commentaires non bloquants | Reconciliation avec `main`, CI fraiche, puis merge si aucune regression |
+| Lecture Smets — Mathematics of Neural Networks | Source publique tracee + analyse pedagogique revue et mergee (PR #9) ; dossier `studies/smets-equivariance-to-gcnn-lab.md` en `STUDY_DESIGN`, review independante favorable | Apres merge de PR #11, preciser avant `LAB_CANDIDATE` H5, budget de fairness et contre-regime de mauvaise symetrie |
 | M3-W1 K-means | Notes disponibles | Reconstruire les chapitres 1 a 3 |
 | M2-W4 arbres et ensembles | Notes disponibles | Consolider en partie II |
 | Parties I a III | Planifie | Integrer progressivement les conversations |
@@ -36,3 +37,7 @@ empreinte, contenu soutenu par la source, interpretation Diderot, limites de la
 source et experience falsifiable proposee. Une lecture capitalisee n'est pas
 consideree comme un chapitre termine tant que les criteres ci-dessus ne sont pas
 satisfaits.
+
+Pour une etude a venir, utiliser le cycle de vie de [`studies/README.md`](../studies/README.md) :
+la source, l'interpretation, le protocole experimental et les preuves observees
+doivent rester des couches distinctes jusqu'a l'integration finale dans le livre.
