@@ -1,5 +1,5 @@
 schema_version: 1
-updated: "2026-08-17"
+updated: "2026-08-31"
 sources:
   - id: m3-w1-11-video
     kind: private_course_video
@@ -29,4 +29,35 @@ sources:
       Les captures fournies dans la conversation ne sont pas redistribuees; le
       laboratoire publie uniquement du texte, du code et des derivations
       pedagogiques originales.
-
+  - id: vaswani-2017-attention-is-all-you-need
+    kind: public_research_paper
+    title: "Attention Is All You Need"
+    authors: "Ashish Vaswani et al."
+    url: "https://arxiv.org/abs/1706.03762"
+    accessed: "2026-08-31"
+    publication: reference_only
+    note: >-
+      Source primaire pour l'architecture Transformer et la scaled dot-product
+      attention. Le guide Diderot publie uniquement des reformulations,
+      derivations et exemples pedagogiques originaux.
+  - id: alammar-illustrated-transformer
+    kind: public_pedagogical_article
+    title: "The Illustrated Transformer"
+    author: "Jay Alammar"
+    url: "https://jalammar.github.io/illustrated-transformer/"
+    accessed: "2026-08-31"
+    publication: reference_only
+    note: >-
+      Ressource pedagogique utilisee pour reconstruire visuellement le flux
+      embedding -> Q/K/V -> self-attention -> representations contextualisees.
+  - id: deeplearningai-sequence-models
+    kind: public_course_page
+    title: "Sequence Models"
+    author: "DeepLearning.AI / Andrew Ng et al."
+    url: "https://www.coursera.org/learn/nlp-sequence-models"
+    accessed: "2026-08-31"
+    publication: reference_only
+    note: >-
+      Pont pedagogique apres la Machine Learning Specialization : word
+      embeddings, attention mechanism, self-attention, multi-head attention et
+      Transformer. Aucun contenu de cours tiers n'est redistribue.
