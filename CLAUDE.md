@@ -14,10 +14,10 @@ publication-specific notation tables, but it must not fork a competing learning 
 When new notation learning is durable, propose or hand it off to the canonical atlas.
 
 Pinned harness entrypoint:
-`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f/HARNESS.md`
+`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/e80097fe8eb88c9e9340732683710ba1dc2ae008/HARNESS.md`
 
 Pinned notation contract:
-`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f/pedagogy/MATHEMATICAL_NOTATION_CAPITALIZATION.md`
+`https://raw.githubusercontent.com/gharbonnier78/scientific-research-harness/e80097fe8eb88c9e9340732683710ba1dc2ae008/pedagogy/MATHEMATICAL_NOTATION_CAPITALIZATION.md`
 
 Agent-generated explanations remain draft until reviewed. If the pinned harness cannot be
 loaded, report that limitation before claiming compliance or releasing a scientific gate.
