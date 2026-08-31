@@ -21,11 +21,27 @@ Version `0.1.0` : architecture complete du depot et premier chapitre finalise :
 Le plan global du livre se trouve dans [`docs/course-map.md`](docs/course-map.md)
 et l'avancement dans [`docs/progress.md`](docs/progress.md).
 
-Les sujets déjà capitalisés mais pas encore transformés en chapitres ou labs
-terminés sont conservés dans [`studies/`](studies/README.md). Cet espace garde la
-trace complète `source -> lecture -> review -> hypothèse -> chapitre -> protocole
-expérimental -> preuves -> intégration` au lieu de réduire les travaux futurs à
+Les sujets deja capitalises mais pas encore transformes en chapitres ou labs
+termines sont conserves dans [`studies/`](studies/README.md). Cet espace garde la
+trace complete `source -> lecture -> review -> hypothese -> chapitre -> protocole
+experimental -> preuves -> integration` au lieu de reduire les travaux futurs a
 une simple liste de TODO.
+
+## Harness et atlas des notations
+
+Le depot adopte le `scientific-research-harness` par une reference immuable
+declaree dans [`harness-adoption.yaml`](harness-adoption.yaml). Les agents de
+depot disposent de points d'entree courts (`AGENTS.md` et `CLAUDE.md`) qui
+chargent ce contrat sans qu'il soit necessaire de le repeter dans chaque
+prompt. La meta-documentation se trouve dans
+[`docs/harness-meta.md`](docs/harness-meta.md).
+
+La table LaTeX du livre dans `book/chapters/appendix-notation.tex` reste une vue
+specifique a cette publication. L'atlas pedagogique transverse et indexe des
+notations est maintenu dans le depot canonique Diderot `mmals-ml-wiki`, sous
+`mathematics/notation/registry.json`, avec une page interactive et une planche
+A2 imprimable. Le livre ne doit pas creer un registre concurrent : une nouvelle
+notation durable doit etre capitalisee ou remise au registre Diderot commun.
 
 ## Laboratoires transverses Diderot
 

@@ -9,8 +9,8 @@ Derniere mise a jour : 2026-08-31.
 | Wave Equation Toy Lab | Fusionne et valide : guide + 8 experiences + solveur + tests + execution notebook CI | Utiliser comme base pour les laboratoires de stabilite et de fidelite |
 | Von Neumann & CFL Lab | Fusionne et valide : derivation + notebook + helpers spectraux + tests + execution CI | Reutiliser pour phase, dispersion et limites de stabilite |
 | Wave Lab 3 — convergence / verification | Candidat PR : solution exacte + raffinement + ordre observe + PPW + phase + energie + budget d'erreurs | Executer notebook en CI, relire les resultats de convergence et fusionner si coherents |
-| Espace `studies/` | Candidat PR : cycle de vie des etudes a venir, gates et regles source / Diderot / experiment / evidence | Revue independante du modele de gouvernance puis reutilisation pour les prochaines sources |
-| Lecture Smets — Mathematics of Neural Networks | Source publique tracee + analyse pedagogique revue et mergee (PR #9) ; dossier `studies/smets-equivariance-to-gcnn-lab.md` en `STUDY_DESIGN` | Revue Claude du study design, puis separer chapitre candidat et lab candidat |
+| Espace `studies/` | Candidat PR : cycle de vie des etudes a venir, gates et regles source / Diderot / experiment / evidence ; review independante PR #11 favorable avec commentaires non bloquants | Reconciliation avec `main`, CI fraiche, puis merge si aucune regression |
+| Lecture Smets — Mathematics of Neural Networks | Source publique tracee + analyse pedagogique revue et mergee (PR #9) ; dossier `studies/smets-equivariance-to-gcnn-lab.md` en `STUDY_DESIGN`, review independante favorable | Apres merge de PR #11, preciser avant `LAB_CANDIDATE` H5, budget de fairness et contre-regime de mauvaise symetrie |
 | M3-W1 K-means | Notes disponibles | Reconstruire les chapitres 1 a 3 |
 | M2-W4 arbres et ensembles | Notes disponibles | Consolider en partie II |
 | Parties I a III | Planifie | Integrer progressivement les conversations |
