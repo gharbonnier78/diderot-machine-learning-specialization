@@ -1,5 +1,5 @@
 schema_version: 1
-updated: "2026-08-17"
+updated: "2026-08-31"
 sources:
   - id: m3-w1-11-video
     kind: private_course_video
@@ -29,4 +29,24 @@ sources:
       Les captures fournies dans la conversation ne sont pas redistribuees; le
       laboratoire publie uniquement du texte, du code et des derivations
       pedagogiques originales.
+  - id: smets-2024-mathematics-of-neural-networks
+    kind: public_academic_lecture_notes
+    title: "Mathematics of Neural Networks (Lecture Notes Graduate Course)"
+    author: "Bart M. N. Smets"
+    arxiv_id: "2403.04807"
+    arxiv_version: "v1"
+    url: "https://arxiv.org/abs/2403.04807"
+    pdf_url: "https://arxiv.org/pdf/2403.04807"
+    companion_code_url: "https://gitlab.com/bsmetsjr/mathematics_of_neural_networks"
+    local_filename: "1786122202337.pdf"
+    sha256: "4f4900e1c7dfe4036cb01b459ecee2e6fcac042fd79bb4cf54304fc7ae652a75"
+    bytes: 2025085
+    accessed: "2026-08-31"
+    publication: reference_only
+    note: >-
+      Empreinte SHA-256 calculee sur la copie locale exacte fournie pour
+      analyse. Le document porte l'identifiant arXiv:2403.04807v1; le hash
+      ci-dessus n'est pas presente comme un hash canonique publie par arXiv.
+      Synthese pedagogique originale dans
+      chat-notes/2026-08-31-smets-mathematics-of-neural-networks.md.
 
