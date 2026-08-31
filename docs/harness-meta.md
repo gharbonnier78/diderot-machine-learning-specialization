@@ -23,10 +23,12 @@ The short root files are deliberately maps rather than duplicated mega-prompts. 
 harness commit is pinned in `harness-adoption.yaml` so a future harness change is an explicit
 dependency upgrade rather than silent drift.
 
-The current provisional pin is
-`2d1cefe42676fafde9b4a2fa5bc6d300abdcfb4f`, the current head of upstream harness PR #18.
-After review/merge, this repository should explicitly upgrade to the reviewed immutable
-commit or tag.
+The current reviewed immutable pin is
+`e80097fe8eb88c9e9340732683710ba1dc2ae008`, the merged harness state after PR #19. PR #18
+introduced mathematical-notation capitalization and reusable repository-agent bootstraps;
+PR #19 independently reviewed and clarified the single-canonical-registry rule and the
+orchestration between the pedagogical concept contract and the notation-capitalization
+contract. Future upgrades must remain explicit immutable dependency changes.
 
 ## Mathematical notation
 
