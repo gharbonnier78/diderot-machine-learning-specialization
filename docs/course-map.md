@@ -75,3 +75,14 @@ Il distingue explicitement la verification numerique (resout-on correctement
 les equations choisies ?) de la validation physique (les equations sont-elles
 adequates pour le systeme reel ?), afin de preparer proprement le futur passage
 a Saint-Venant.
+
+### Lecture transverse : geometrie, groupes de Lie et equivariance
+
+La note [`Mathematics of Neural Networks — Smets`](../chat-notes/2026-08-31-smets-mathematics-of-neural-networks.md)
+capitalise une source graduate-level qui part des fondations familières des
+reseaux de neurones puis reconstruit le chemin
+`inductive bias -> varietes -> groupes de Lie -> actions -> espaces homogenes ->
+operateurs equivariants -> G-CNN -> discretisation -> operateurs tropicaux`.
+Elle sert de pont pedagogique entre la Machine Learning Specialization et le fil
+Diderot `structure-preserving ML`. Le futur laboratoire associe devra mesurer
+l'erreur d'equivariance et comparer CNN, augmentation de donnees et G-CNN.
