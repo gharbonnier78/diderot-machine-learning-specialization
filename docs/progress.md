@@ -1,6 +1,6 @@
 # Progression editoriale
 
-Derniere mise a jour : 2026-08-19.
+Derniere mise a jour : 2026-08-31.
 
 | Element | Etat | Prochaine action |
 |---|---|---|
@@ -9,6 +9,7 @@ Derniere mise a jour : 2026-08-19.
 | Wave Equation Toy Lab | Fusionne et valide : guide + 8 experiences + solveur + tests + execution notebook CI | Utiliser comme base pour les laboratoires de stabilite et de fidelite |
 | Von Neumann & CFL Lab | Fusionne et valide : derivation + notebook + helpers spectraux + tests + execution CI | Reutiliser pour phase, dispersion et limites de stabilite |
 | Wave Lab 3 — convergence / verification | Candidat PR : solution exacte + raffinement + ordre observe + PPW + phase + energie + budget d'erreurs | Executer notebook en CI, relire les resultats de convergence et fusionner si coherents |
+| Lecture Smets — Mathematics of Neural Networks | Source publique tracee + SHA-256 local + analyse pedagogique Diderot + lien arXiv/code | Transformer ulterieurement le fil equivariance en chapitre/lab falsifiable CNN vs augmentation vs G-CNN |
 | M3-W1 K-means | Notes disponibles | Reconstruire les chapitres 1 a 3 |
 | M2-W4 arbres et ensembles | Notes disponibles | Consolider en partie II |
 | Parties I a III | Planifie | Integrer progressivement les conversations |
@@ -29,3 +30,9 @@ Pour une etude de convergence, ajouter en plus : une reference exacte ou
 independante, une norme d'erreur explicite, au moins trois niveaux de
 raffinement, un ordre observe et une distinction claire entre erreur numerique,
 erreur de modele et erreur de donnees.
+
+Pour une lecture transverse de source, distinguer explicitement : provenance et
+empreinte, contenu soutenu par la source, interpretation Diderot, limites de la
+source et experience falsifiable proposee. Une lecture capitalisee n'est pas
+consideree comme un chapitre termine tant que les criteres ci-dessus ne sont pas
+satisfaits.
