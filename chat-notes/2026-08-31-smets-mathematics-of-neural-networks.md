@@ -4,7 +4,7 @@
 
 Cette entrée capitalise une **source publique académique/pédagogique** dans Diderot ML. Elle ne transforme pas encore la source en chapitre final du livre : elle sert de pont documenté entre les fondations de la Machine Learning Specialization et le fil transverse `géométrie -> symétries -> inductive bias -> architectures équivariantes`.
 
-La synthèse ci-dessous est une reformulation originale. Les affirmations attribuées au document sont distinguées des interprétations Diderot.
+La synthèse ci-dessous est une reformulation originale. Les affirmations attribuées au document sont distinguées des interprétations Diderot. Les ancres `Smets §...`, `Def.`, `Thm.`, `Ex.` ou `Eq.` renvoient à la version `arXiv:2403.04807v1` afin qu'un lecteur puisse revenir rapidement à la source primaire.
 
 ---
 
@@ -27,6 +27,8 @@ La synthèse ci-dessous est une reformulation originale. Les affirmations attrib
 
 ## 2. Pourquoi cette source est importante pour Diderot ML
 
+**Source primaire : Smets, Introduction, chap. 1 et chap. 3.**
+
 Le document a une forme particulièrement utile pour notre parcours : il commence avec le langage standard du machine learning — apprentissage supervisé, neurones, fonctions d'activation, SGD, entraînement, réseaux profonds, initialisation, CNN, backpropagation et Adam — puis change progressivement de point de vue.
 
 La question n'est plus seulement :
@@ -39,9 +41,11 @@ mais :
 
 C'est précisément le passage d'un modèle générique à un modèle muni d'un **inductive bias structurel**.
 
-Le document formule d'ailleurs l'inductive bias dès le chapitre 1 comme l'ensemble des hypothèses nécessaires pour choisir le modèle, la loss et la manière d'optimiser alors que ces choix ne sont pas eux-mêmes déterminés par les données. Le chapitre 3 donne ensuite une incarnation mathématique très concrète de cette idée : **encoder une symétrie de groupe dans l'opérateur lui-même**.
+Le document formule l'inductive bias dès le chapitre 1 comme l'ensemble des hypothèses nécessaires pour choisir le modèle, la loss et la manière d'optimiser alors que ces choix ne sont pas eux-mêmes déterminés par les données. Le chapitre 3 donne ensuite une incarnation mathématique très concrète de cette idée : encoder une symétrie de groupe dans l'opérateur lui-même.
 
-Pour Diderot, c'est un pivot pédagogique majeur :
+### Lecture Diderot
+
+Pour Diderot, le chemin pédagogique devient :
 
 ```text
 apprendre une fonction
@@ -62,6 +66,8 @@ réduire l'espace de fonctions que le réseau doit explorer
 ---
 
 ## 3. Carte du document
+
+**Source primaire : Smets, table des matières, chap. 1–3.**
 
 ### Partie A — Fondations ML
 
@@ -86,7 +92,11 @@ Le chapitre 2 traite notamment :
 - différentiation automatique et graphe de calcul ;
 - Adagrad, RMSProp et Adam.
 
-Un détail pédagogiquement intéressant est que Smets ne cache pas la fragilité de certaines justifications heuristiques. Après avoir dérivé des règles d'initialisation sous plusieurs hypothèses simplificatrices, il souligne que certaines sont fausses dans les réseaux réels, tout en observant que ces règles restent utiles en pratique. C'est une bonne illustration de la différence entre **preuve**, **approximation**, **heuristique** et **validation empirique**.
+Un détail pédagogiquement intéressant est que Smets ne cache pas la fragilité de certaines justifications heuristiques. Après avoir dérivé des règles d'initialisation sous plusieurs hypothèses simplificatrices, il souligne que certaines sont fausses dans les réseaux réels, tout en observant que ces règles restent utiles en pratique.
+
+**Source primaire : Smets §2.2.3, “Those are a lot of Assumptions”.**
+
+C'est une bonne illustration de la différence entre **preuve**, **approximation**, **heuristique** et **validation empirique**.
 
 ### Partie C — Géométrie et équivariance
 
@@ -105,6 +115,8 @@ Le chapitre 3 constitue la contribution la plus distinctive du cours :
 ---
 
 ## 4. Invariance et équivariance : le concept à retenir
+
+**Source primaire : Smets, ouverture du chap. 3 et Eq. (3.5).**
 
 Le document distingue utilement deux idées.
 
@@ -151,9 +163,11 @@ Ce diagramme est plus important que la notation : il dit que le réseau **respec
 
 ## 5. Pourquoi ne pas simplement faire de la data augmentation ?
 
+**Source primaire : Smets, ouverture du chap. 3, Fig. 3.1.**
+
 Smets donne l'intuition dès l'ouverture du chapitre 3 : on pourrait ajouter de nombreuses versions translatées, tournées ou redimensionnées des exemples et espérer que le réseau apprenne la symétrie. Mais cela augmente fortement le volume d'entraînement et ne garantit pas que la propriété soit réellement encodée.
 
-L'alternative est architecturale : construire une famille d'opérateurs pour laquelle la propriété est vraie par construction.
+L'alternative est architecturale : construire une famille d'opérateurs pour laquelle la propriété est vraie par construction dans le cadre mathématique considéré.
 
 ### Lecture Diderot
 
@@ -165,11 +179,13 @@ Mais il faut ajouter immédiatement la clause inverse :
 
 > **n'imposer une symétrie que si elle est réellement pertinente pour le phénomène et la décision.**
 
-Un mauvais inductive bias ne réduit pas seulement l'espace de recherche : il peut exclure la solution correcte.
+Un inductive bias trop restrictif ou mal choisi peut exclure des fonctions nécessaires à la tâche. Cette phrase est une **interprétation Diderot**, pas un théorème attribué à Smets.
 
 ---
 
 ## 6. Le chemin mathématique : variété -> groupe de Lie -> action -> espace homogène
+
+**Source primaire : Smets §3.1–§3.2, notamment Def./Ex. 3.15, Def. 3.21 et Eq. (3.6).**
 
 ### 6.1 Variété
 
@@ -212,21 +228,29 @@ Ces deux objets deviennent ensuite un mécanisme de conception : les contraintes
 
 ## 7. Le résultat structurel : caractériser les opérateurs linéaires équivariants
 
-Le théorème 3.32 est le cœur mathématique du passage vers les G-CNN. Il donne une représentation d'opérateurs linéaires équivariants à partir d'un noyau dont la forme est contrainte par l'action du groupe et le stabilisateur.
+**Source primaire : Smets §3.3, Thm. 3.32 et Ex. 3.33.**
 
-Dans le cas où domaine et codomaine sont le groupe lui-même, on retrouve la convolution de groupe.
+Le théorème 3.32 est le cœur mathématique du passage vers les G-CNN. Il donne, sous les hypothèses précisées dans le théorème, une représentation d'opérateurs linéaires équivariants à partir d'un noyau dont la forme est contrainte par l'action du groupe et le stabilisateur.
 
-Cette lecture généralise une idée déjà cachée dans les CNN ordinaires :
+Dans le cas où domaine et codomaine sont le groupe lui-même, l'exemple 3.33 conduit à la convolution de groupe.
 
-- un CNN standard partage les mêmes poids à travers les translations ;
-- cette structure lui donne une équivariance naturelle à la translation ;
-- un G-CNN remplace la translation seule par une action de groupe plus générale.
+### Lecture Diderot — CNN classique et translation
 
-Le poids partagé n'est donc pas seulement une astuce de compression de paramètres. Il est l'expression algorithmique d'une symétrie.
+La connexion suivante est une **lecture rétrospective Diderot / propriété mathématique standard de la convolution**, et non une citation textuelle de Smets :
+
+- dans un CNN convolutionnel idéal, la même opération locale est paramétrée de manière partagée aux différentes positions ;
+- dans le cadre approprié, la convolution possède ainsi une équivariance à la translation ;
+- le G-CNN généralise cette logique vers une action de groupe plus riche.
+
+Le weight sharing est donc un mécanisme de paramétrisation qui peut réaliser une symétrie, mais il ne suffit pas à affirmer qu'un CNN numérique arbitraire est **exactement** équivariant en pratique : traitements de bord, sous-échantillonnage, interpolation et autres opérations peuvent rompre ou approximer cette propriété.
+
+Smets introduit bien le weight sharing comme stratégie de paramétrisation adaptée aux données à structure spatiale (§2.1.3 et §2.3) ; l'interprétation explicitement géométrique ci-dessus est notre raccord pédagogique avec le chapitre 3.
 
 ---
 
 ## 8. L'architecture SE(2) : lifting -> group convolution -> projection
+
+**Source primaire : Smets §3.4.1–§3.4.3, notamment Eq. (3.22) et Eq. (3.23).**
 
 Le cours propose une construction concrète d'un CNN équivariant aux rotations et translations.
 
@@ -250,7 +274,7 @@ Le coût est une représentation de dimension supérieure, mais le gain est que 
 
 ### Étape 2 — Group convolutions
 
-Une fois dans l'espace du groupe, on empile des convolutions de groupe. Elles transportent l'information tout en préservant l'équivariance.
+Une fois dans l'espace du groupe, on empile des convolutions de groupe. Elles transportent l'information tout en préservant l'équivariance dans le cadre théorique développé par Smets.
 
 ### Étape 3 — Projection
 
@@ -277,6 +301,8 @@ sortie 2D cohérente avec rotation + translation
 ---
 
 ## 9. Discrétisation : là où la théorie rencontre la machine
+
+**Source primaire : Smets §3.4.4, Fig. 3.6 et Remark 3.37.**
 
 Le chapitre développe d'abord le cadre dans un espace continu, puis ne discrétise qu'au moment de l'implémentation.
 
@@ -307,7 +333,7 @@ Il faut donc distinguer :
 équivariance numérique mesurée
 ```
 
-Cela suggère immédiatement une métrique expérimentale :
+Cela suggère immédiatement une métrique expérimentale Diderot :
 
 \[
 \varepsilon_{eq}(x,g)
@@ -315,11 +341,13 @@ Cela suggère immédiatement une métrique expérimentale :
 \|F(g\cdot x)-g\cdot F(x)\|.
 \]
 
-Un futur lab Diderot devrait mesurer cette erreur en fonction du nombre d'orientations et de la méthode d'interpolation.
+Cette métrique est proposée ici pour le futur laboratoire ; elle n'est pas attribuée telle quelle à Smets. Le lab devra notamment mesurer cette erreur en fonction du nombre d'orientations et de la méthode d'interpolation.
 
 ---
 
 ## 10. Le détour tropical est loin d'être anecdotique
+
+**Source primaire : Smets §3.5.1–§3.5.3 et Thm. 3.54.**
 
 La dernière section élargit encore le cadre. Au lieu de considérer « linéaire » et « non linéaire » comme une opposition absolue, le cours demande : peut-on remplacer l'algèbre usuelle \((+,\times)\) par une autre structure ?
 
@@ -327,13 +355,11 @@ Il introduit les semi-anneaux puis le semi-anneau tropical, où des opérations 
 
 Le résultat pédagogique remarquable est que des opérations très familières des réseaux — notamment **ReLU** et **max pooling** — peuvent être replacées dans un cadre d'opérateurs tropicaux ou tropiquement affines.
 
-Le chapitre construit ensuite des opérateurs tropicaux équivariants, analogues non classiques des opérateurs intégrals linéaires.
+Smets développe ensuite l'analogue tropical des opérateurs équivariants linéaires et résume cette construction au théorème 3.54. Il conclut que de nombreux opérateurs employés en réseaux de neurones, en particulier ReLU et max pooling, entrent dans ce cadre de semi-modules équivariants.
 
-### Pourquoi c'est important
+### Pourquoi c'est important — Lecture Diderot
 
-Le message profond n'est pas seulement « il existe une jolie interprétation algébrique de max pooling ».
-
-Il est plutôt :
+Le message que nous retenons n'est pas seulement « il existe une jolie interprétation algébrique de max pooling » mais :
 
 > **la préservation de structure ne s'arrête pas aux couches linéaires.**
 
@@ -342,6 +368,8 @@ Cela ouvre la porte à un design où l'on raisonne sur l'algèbre de l'opérateu
 ---
 
 ## 11. Ce que cette source change dans notre modèle mental du deep learning
+
+**Source primaire pour le cas des symétries : Smets chap. 3. La généralisation ci-dessous est une synthèse Diderot.**
 
 ### Avant
 
@@ -355,7 +383,7 @@ On peut séparer explicitement trois niveaux :
 2. **ce que nous laissons apprendre** : paramètres, résidus, inconnues structurelles ;
 3. **ce que nous devons vérifier expérimentalement** : que l'inductive bias choisi améliore réellement généralisation, efficacité et robustesse dans le régime visé.
 
-Cette séparation rejoint un principe général Diderot :
+Seul le **cas des symétries de groupe** est directement documenté par cette source. Les autres structures citées dans le point 1 sont des prolongements Diderot à traiter avec leurs propres sources.
 
 ```text
 structure connue
@@ -373,6 +401,8 @@ modèle d'ingénierie plus crédible
 
 ## 12. Connexions transverses Diderot
 
+**Statut : connexions Diderot ; elles ne doivent pas être lues comme des équivalences affirmées par Smets.**
+
 ### Traitement du signal et filtrage
 
 Le passage `signal -> opérateur -> symétrie -> convolution` relie directement cette source au traitement du signal. Un filtre n'est plus seulement vu comme un calcul local : sa forme peut être dérivée de propriétés d'invariance/équivariance.
@@ -380,8 +410,6 @@ Le passage `signal -> opérateur -> symétrie -> convolution` relie directement 
 ### Géométrie de Lie et estimation
 
 Cette source traite surtout l'action de groupes pour construire des réseaux. Elle est complémentaire — mais non identique — aux travaux sur le filtrage d'états vivant directement sur des groupes de Lie ou des variétés riemanniennes. Dans un cas, la géométrie contraint **l'architecture d'apprentissage** ; dans l'autre, elle contraint **l'espace de l'état estimé et sa dynamique**.
-
-Il faudra préserver cette distinction dans Diderot.
 
 ### Représentations et embeddings
 
@@ -413,9 +441,9 @@ Le document est un support de cours de niveau graduate, pas une étude expérime
 
 Il ne constitue pas une théorie générale de tous les réseaux modernes. Il ne faut pas extrapoler directement ses conclusions à toutes les architectures, notamment aux grands Transformers ou aux modèles de monde.
 
-### 13.3 Une symétrie imposée peut être fausse
+### 13.3 Une symétrie imposée peut être fausse ou trop restrictive
 
-L'équivariance est bénéfique seulement si la transformation choisie correspond réellement à une régularité de la tâche. Si l'orientation absolue contient de l'information, imposer une invariance complète à la rotation peut détruire un signal utile.
+L'équivariance est utile seulement si la transformation choisie correspond réellement à une régularité pertinente de la tâche. Si l'orientation absolue contient de l'information, imposer une invariance complète à la rotation peut détruire un signal utile. Plus généralement, une contrainte architecturale stricte peut retirer de la classe de fonctions accessibles certaines solutions nécessaires.
 
 ### 13.4 Continu et discret doivent être séparés
 
@@ -423,15 +451,17 @@ Le cadre continu facilite les preuves. L'implémentation discrète introduit une
 
 ### 13.5 Inductive bias n'est pas preuve de généralisation
 
-Réduire l'espace d'hypothèses peut améliorer l'efficacité statistique, mais la source ne démontre pas que toute architecture équivariante sera meilleure dans toute situation. Cela reste une hypothèse à tester pour le problème considéré.
+Réduire l'espace d'hypothèses peut améliorer l'efficacité statistique lorsque le biais correspond au problème, mais la source ne démontre pas que toute architecture équivariante sera meilleure dans toute situation. Cela reste une hypothèse à tester pour le problème considéré.
 
 ---
 
 ## 14. Expérience Diderot proposée
 
+**Statut : protocole Diderot à tester ; non présenté comme résultat de Smets.**
+
 ### Question
 
-Une contrainte d'équivariante rotation-translation apporte-t-elle une propriété mesurable qu'un CNN standard ne possède pas intrinsèquement ?
+Une contrainte d'équivariance rotation-translation apporte-t-elle une propriété mesurable qu'un CNN standard ne possède pas intrinsèquement au même degré ?
 
 ### Protocole minimal
 
@@ -440,6 +470,16 @@ Comparer :
 1. CNN standard ;
 2. CNN standard + augmentation par rotations ;
 3. G-CNN équivariant.
+
+Contrôles expérimentaux à fixer avant exécution :
+
+- split train/validation/test identique ;
+- plusieurs seeds pré-déclarées ;
+- budget d'optimisation comparable ;
+- capacité/paramètres comparables autant que possible ;
+- distribution des rotations d'entraînement explicitée ;
+- tests séparés sur rotations vues et non vues ;
+- intervalles d'incertitude, pas seulement une valeur ponctuelle.
 
 Mesurer séparément :
 
@@ -455,6 +495,8 @@ Puis faire une ablation sur :
 - nombre d'orientations discrètes ;
 - interpolation ;
 - quantité de data augmentation.
+
+Le protocole devra préciser si \(\varepsilon_{eq}\) est évaluée uniquement en sortie ou aussi couche par couche, et isoler autant que possible l'erreur introduite par l'interpolation de celle du réseau lui-même.
 
 ### Hypothèse falsifiable
 
