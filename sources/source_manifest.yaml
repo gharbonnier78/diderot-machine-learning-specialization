@@ -1,5 +1,5 @@
 schema_version: 1
-updated: "2026-08-31"
+updated: "2026-09-04"
 sources:
   - id: m3-w1-11-video
     kind: private_course_video
@@ -49,4 +49,37 @@ sources:
       ci-dessus n'est pas presente comme un hash canonique publie par arXiv.
       Synthese pedagogique originale dans
       chat-notes/2026-08-31-smets-mathematics-of-neural-networks.md.
-
+  - id: nist-sematedch-statistical-tests-power
+    kind: public_authoritative_handbook
+    title: "NIST/SEMATECH e-Handbook of Statistical Methods — Statistical tests and quantitative techniques"
+    authority: "NIST"
+    urls:
+      - "https://www.itl.nist.gov/div898/handbook/prc/section1/prc13.htm"
+      - "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm"
+    accessed: "2026-09-04"
+    publication: reference_only
+    supports:
+      - "type I error / alpha"
+      - "type II error / beta"
+      - "statistical power = 1 - beta for a specified alternative"
+    note: >-
+      Source de reference pour la definition statistique. Elle est separee du
+      contexte Study 1B qui constitue un encounter pedagogique du concept et non
+      l'autorite definissant la puissance statistique.
+  - id: study1b-power-design-encounter-2026-09
+    kind: public_research_project_artifacts
+    repository: "gharbonnier78/siamese-embedding-compression-lab"
+    commit: "cfb1bdb05c9cfab0da20d89ae251cdc17930e088"
+    urls:
+      - "https://github.com/gharbonnier78/siamese-embedding-compression-lab/blob/agent/study1b-preregistration-20260827/protocol/simulations/STUDY1B_POWER_DESIGN_SENSITIVITY_V0_1_2026-08-31.yaml"
+      - "https://github.com/gharbonnier78/siamese-embedding-compression-lab/blob/agent/study1b-preregistration-20260827/protocol/simulations/STUDY1B_POWER_DESIGN_S3_POWER_CALIBRATION_V0_1_2026-09-03.yaml"
+      - "https://github.com/gharbonnier78/siamese-embedding-compression-lab/commit/cfb1bdb05c9cfab0da20d89ae251cdc17930e088"
+    accessed: "2026-09-04"
+    publication: reference_only
+    role: concept_encounter_and_research_context
+    note: >-
+      Contexte dans lequel puissance, erreurs de type II, non-inferiorite et
+      quantite d'information sont devenues des objets de decision concrets. Les
+      artefacts Study 1B ne remplacent pas une source statistique de reference.
+      Synthese pedagogique dans
+      chat-notes/2026-09-04-statistical-power-type-i-type-ii-study1b.md.
