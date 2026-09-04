@@ -1,6 +1,6 @@
 # Progression editoriale
 
-Derniere mise a jour : 2026-08-31.
+Derniere mise a jour : 2026-09-04.
 
 | Element | Etat | Prochaine action |
 |---|---|---|
@@ -11,6 +11,7 @@ Derniere mise a jour : 2026-08-31.
 | Wave Lab 3 — convergence / verification | Candidat PR : solution exacte + raffinement + ordre observe + PPW + phase + energie + budget d'erreurs | Executer notebook en CI, relire les resultats de convergence et fusionner si coherents |
 | Espace `studies/` | Candidat PR : cycle de vie des etudes a venir, gates et regles source / Diderot / experiment / evidence ; review independante PR #11 favorable avec commentaires non bloquants | Reconciliation avec `main`, CI fraiche, puis merge si aucune regression |
 | Lecture Smets — Mathematics of Neural Networks | Source publique tracee + analyse pedagogique revue et mergee (PR #9) ; dossier `studies/smets-equivariance-to-gcnn-lab.md` en `STUDY_DESIGN`, review independante favorable | Apres merge de PR #11, preciser avant `LAB_CANDIDATE` H5, budget de fairness et contre-regime de mauvaise symetrie |
+| Puissance statistique / erreurs type I-II / non-inferiorite | Draft pedagogique source-tracee, apparue dans Study 1B ; distinction mesures descriptives vs force de decision, analogie ingenierie, misconceptions et gate de comprehension ajoutes | Relecture humaine ; proposer `H0`, `H1`, `alpha`, `beta`, `1-beta` a l'atlas canonique de notation ; integrer plus tard au chapitre transverse statistiques/evidence |
 | M3-W1 K-means | Notes disponibles | Reconstruire les chapitres 1 a 3 |
 | M2-W4 arbres et ensembles | Notes disponibles | Consolider en partie II |
 | Parties I a III | Planifie | Integrer progressivement les conversations |
