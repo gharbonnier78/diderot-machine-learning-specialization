@@ -56,16 +56,39 @@ sources:
     urls:
       - "https://www.itl.nist.gov/div898/handbook/prc/section1/prc13.htm"
       - "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm"
+      - "https://www.itl.nist.gov/div898/handbook/prc/section1/prc131.htm"
     accessed: "2026-09-04"
     publication: reference_only
     supports:
+      - "null and alternative hypotheses"
       - "type I error / alpha"
       - "type II error / beta"
       - "statistical power = 1 - beta for a specified alternative"
+      - "critical regions and p-values"
     note: >-
-      Source de reference pour la definition statistique. Elle est separee du
-      contexte Study 1B qui constitue un encounter pedagogique du concept et non
-      l'autorite definissant la puissance statistique.
+      Source de reference pour les notions de test d'hypothese, alpha, beta et
+      puissance. Elle est separee des contextes Study 1B et Test/IVVQ qui sont
+      des encounters pedagogiques et des syntheses d'ingenierie.
+  - id: nasa-systems-engineering-handbook-vv
+    kind: public_authoritative_engineering_handbook
+    title: "NASA Systems Engineering Handbook"
+    authority: "NASA"
+    urls:
+      - "https://www.nasa.gov/reference/system-engineering-handbook-appendix/"
+      - "https://www.nasa.gov/wp-content/uploads/2018/09/nasa_systems_engineering_handbook_0.pdf"
+    accessed: "2026-09-04"
+    publication: reference_only
+    supports:
+      - "requirements verification matrix"
+      - "verification and validation planning"
+      - "verification methods including analysis, inspection, demonstration and test"
+      - "qualification testing context"
+      - "verification testing linked to requirements and validation testing linked to intended use / ConOps"
+    note: >-
+      Source systems-engineering pour relier les exigences aux methodes de V&V.
+      La proposition Diderot consistant a expliciter Type I, Type II, power et
+      incertitude residuelle dans certaines qualifications quantitatives est une
+      synthese d'ingenierie, pas une exigence NASA citee comme telle.
   - id: study1b-power-design-encounter-2026-09
     kind: public_research_project_artifacts
     repository: "gharbonnier78/siamese-embedding-compression-lab"
@@ -81,5 +104,6 @@ sources:
       Contexte dans lequel puissance, erreurs de type II, non-inferiorite et
       quantite d'information sont devenues des objets de decision concrets. Les
       artefacts Study 1B ne remplacent pas une source statistique de reference.
-      Synthese pedagogique dans
-      chat-notes/2026-09-04-statistical-power-type-i-type-ii-study1b.md.
+      Syntheses pedagogiques dans
+      chat-notes/2026-09-04-statistical-power-type-i-type-ii-study1b.md et
+      chat-notes/2026-09-04-hypothesis-testing-as-engineering-qualification.md.
